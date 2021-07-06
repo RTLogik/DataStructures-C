@@ -1,19 +1,22 @@
 # Makefile for LiveData program
 # Author: rtlogik
 #
-# Targets:
-# livdata (goal)
-# lifo.o
-# 
 
-CC=gcc
-OBJECTS=lifo.o livedata.o
+CC = gcc
+OBJECTS = main.o lifo.o livedata.o
+CPPFLAGS = -I ./include
 
-main: $(OBJECTS) osiris.h
-	gcc -o main $(OBJECTS)
+vpath %.h ./include
+vpath %.c ./src
 
-lifo.o: lifo.h osiris.h
-livedata.o: livedata.h osiris.h
+main: $(OBJECTS)
+	gcc  -Wall $(OBJECTS) -o main;
+	make clean;
+	echo "Success!"
+
+main.o: datastructs.h
+lifo.o: lifo.h 
+livedata.o: livedata.h 
 
 .PHONY: clean
 clean:

@@ -8,13 +8,16 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "lifo.h"
-#include "livedata.h"
+
 
 typedef union {
     LIFO_Status LIFO;
 } DataStructs_Status;
 
+#include "livedata.h"
 
 #endif /* _DATASTRUCTS_H_ */
