@@ -10,5 +10,4 @@
 DataStructs_Status LiveData_Decode(char * cmd, int * param);
 
 
-
 #endif /* _LIVEDAT_H_ */

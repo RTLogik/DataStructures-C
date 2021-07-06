@@ -1,4 +1,4 @@
-#include "osiris.h"
+#include "datastructs.h"
 
 int main()
 {
@@ -8,7 +8,7 @@ int main()
 
     while(1) {
         scanf("%s %d", cmd, &param);
-        LiveDat_Decode(cmd, &param);
+        LiveData_Decode(cmd, &param);
     }
 }
 

@@ -2,9 +2,9 @@
  * livedata.h by rtlogik
  */
 
-#include "livedat.h"
+#include "datastructs.h"
 
-Status LiveDat_Decode(char * cmd, int * param)
+DataStructs_Status LiveDat_Decode(char * cmd, int * param)
 {
 
 }
