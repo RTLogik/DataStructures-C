@@ -1,6 +1,6 @@
 #include "datastructs.h"
 
-int main()
+int main(void)
 {
     char CMD1[10], CMD2[10], CMD3[10];
 

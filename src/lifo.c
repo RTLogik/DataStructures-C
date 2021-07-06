@@ -7,15 +7,15 @@
 /* Check if pointers are valid */
 inline LIFO_Status LIFO_Check(LIFO_t * lbuf)
 {
-    if(lbuf->LIFO_WIDTH == 1) {
+    if (lbuf->LIFO_WIDTH == 1) {
         if ( ! lbuf || ! (uint8_t *)lbuf->head || ! (uint8_t *)lbuf->base ) {
         return LIFO_NULL;
         }
-    } else if(lbuf->LIFO_WIDTH == 2) {
+    } else if (lbuf->LIFO_WIDTH == 2) {
         if ( ! lbuf || ! (uint16_t *)lbuf->head || ! (uint16_t *)lbuf->base ) {
         return LIFO_NULL;
         }
-    } else if(lbuf->LIFO_WIDTH == 4) {
+    } else if (lbuf->LIFO_WIDTH == 4) {
         if ( ! lbuf || ! (uint32_t *)lbuf->head || ! (uint32_t *)lbuf->base ) {
         return LIFO_NULL;
         }
@@ -52,12 +52,14 @@ LIFO_Status LIFO_Is_Full(LIFO_t * lbuf)
 
 LIFO_Status LIFO_Is_Empty(LIFO_t * lbuf)
 {
-    // Check for errors: 
+    /* Check for errors: */ 
     LIFO_Status errorCheck = LIFO_Check(lbuf);
     if (!errorCheck) return errorCheck;
 
-    if (lbuf->base == lbuf->head) return LIFO_EMPTY;
-    else return LIFO_NOT_EMPTY;
+    if (lbuf->base == lbuf->head) 
+        return LIFO_EMPTY;
+    else 
+        return LIFO_NOT_EMPTY;
 }
 
 LIFO_Status LIFO_Push(LIFO_t * lbuf, uint32_t item2push) 
