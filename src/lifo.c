@@ -5,7 +5,7 @@
 #include "datastructs.h"
 
 /* Check if pointers are valid */
-inline LIFO_Status LIFO_Check(LIFO_t * lbuf)
+inline LIFO_Status LIFO_Check(LIFO_t *lbuf)
 {
     if (lbuf->LIFO_WIDTH == 1) {
         if ( ! lbuf || ! (uint8_t *)lbuf->head || ! (uint8_t *)lbuf->base ) {
@@ -22,11 +22,12 @@ inline LIFO_Status LIFO_Check(LIFO_t * lbuf)
     } 
 }
 
-LIFO_Status LIFO_Is_Full(LIFO_t * lbuf)
+LIFO_Status LIFO_Is_Full(LIFO_t *lbuf)
 {
     // Check for errors:
     LIFO_Status errorCheck = LIFO_Check(lbuf);
-    if (!errorCheck) return errorCheck;
+    if (!errorCheck) 
+        return errorCheck;
 
     if (lbuf->LIFO_WIDTH == 1) {
         if ( (uint8_t *)lbuf->head >= ((uint8_t *)lbuf->base + lbuf->length - 1) ) {
@@ -50,11 +51,12 @@ LIFO_Status LIFO_Is_Full(LIFO_t * lbuf)
 
 }
 
-LIFO_Status LIFO_Is_Empty(LIFO_t * lbuf)
+LIFO_Status LIFO_Is_Empty(LIFO_t *lbuf)
 {
     /* Check for errors: */ 
     LIFO_Status errorCheck = LIFO_Check(lbuf);
-    if (!errorCheck) return errorCheck;
+    if (!errorCheck) 
+        return errorCheck;
 
     if (lbuf->base == lbuf->head) 
         return LIFO_EMPTY;
@@ -62,11 +64,12 @@ LIFO_Status LIFO_Is_Empty(LIFO_t * lbuf)
         return LIFO_NOT_EMPTY;
 }
 
-LIFO_Status LIFO_Push(LIFO_t * lbuf, uint32_t item2push) 
+LIFO_Status LIFO_Push(LIFO_t *lbuf, uint32_t item2push) 
 {
     // Check if buffer is full:
     LIFO_Status fullCheck = LIFO_Is_Full(lbuf);
-    if ( LIFO_Is_Full(lbuf) != LIFO_NOT_FULL ) return fullCheck;
+    if ( LIFO_Is_Full(lbuf) != LIFO_NOT_FULL ) 
+        return fullCheck;
 
     if (lbuf->LIFO_WIDTH == 1) {
         (uint8_t *)lbuf->head++;
@@ -83,11 +86,12 @@ LIFO_Status LIFO_Push(LIFO_t * lbuf, uint32_t item2push)
     }
 }
 
-LIFO_Status LIFO_Pop(LIFO_t * lbuf, uint32_t * item2pop)
+LIFO_Status LIFO_Pop(LIFO_t *lbuf, uint32_t *item2pop)
 {
     // Check if buffer is empty:
     LIFO_Status emptyCheck = LIFO_Is_Empty(lbuf);
-    if ( LIFO_Is_Empty(lbuf) != LIFO_NOT_EMPTY ) return emptyCheck;
+    if ( LIFO_Is_Empty(lbuf) != LIFO_NOT_EMPTY ) 
+        return emptyCheck;
 
     if (lbuf->LIFO_WIDTH == 1) {
         (*(uint8_t *)item2pop) = (*(uint8_t *)lbuf->head);
@@ -101,7 +105,7 @@ LIFO_Status LIFO_Pop(LIFO_t * lbuf, uint32_t * item2pop)
     }
 }
 
-LIFO_Status LIFO_Init(LIFO_t * lbuf, uint8_t width, uint8_t lenght) 
+LIFO_Status LIFO_Init(LIFO_t *lbuf, uint8_t width, uint8_t lenght) 
 {
     if (width == 1) {
         lbuf->LIFO_WIDTH = 1;
@@ -124,7 +128,7 @@ LIFO_Status LIFO_Init(LIFO_t * lbuf, uint8_t width, uint8_t lenght)
     } else return LIFO_WIDTH_ERROR;
 }
 
-inline LIFO_Status LIFO_Delete(LIFO_t * lbuf)
+inline LIFO_Status LIFO_Delete(LIFO_t *lbuf)
 {
     free(lbuf->base);
 }
