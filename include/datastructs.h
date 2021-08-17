@@ -12,12 +12,6 @@
 #include <stdlib.h>
 
 #include "lifo.h"
-
-
-typedef union {
-    LIFO_Status LIFO;
-} DataStructs_Status;
-
 #include "livedata.h"
 
 #endif /* _DATASTRUCTS_H_ */
