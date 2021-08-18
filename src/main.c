@@ -14,9 +14,6 @@ int main(void)
     char cmd1[20], cmd2[20], cmd3[20];
     char *CMD[3] = {cmd1, cmd2, cmd3};
 
-    ld_init();
-
-
     while(1) {
         
         get_command(CMD);
@@ -42,8 +39,8 @@ void get_command(char *CMD[])
         token = strtok(NULL, " ");
 
         slen = strlen(CMD[i]);
-        if (CMD[i][slen-1] == '\n') 
-            CMD[i][slen-1] = '\0';
+        if (CMD[i][slen] == '\n') 
+            CMD[i][slen] = '\0';
         i++;
     }
 }
