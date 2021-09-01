@@ -2,7 +2,7 @@
  * lifo.c by rtlogik
  */
 
-#include "datastructs.h"
+#include "datastr.h"
 
 /* Check if pointers are valid */
 inline LIFO_Status LIFO_Check(LIFO_t * lbuf)
