@@ -5,7 +5,7 @@
 #include "datastr.h"
 
 /* Check if pointers are valid */
-inline LIFO_Status LIFO_Check(LIFO_t *lbuf)
+static LIFO_Status LIFO_Check(LIFO_t *lbuf)
 {
     if (lbuf->width == 1) {
         if ( ! lbuf || ! (uint8_t *)lbuf->head || ! (uint8_t *)lbuf->base ) {
@@ -128,7 +128,7 @@ LIFO_Status LIFO_Init(LIFO_t *lbuf)
     } else return LIFO_WIDTH_ERROR;
 }
 
-inline LIFO_Status LIFO_Delete(LIFO_t *lbuf)
+LIFO_Status LIFO_Delete(LIFO_t *lbuf)
 {
     free(lbuf->base);
 }
