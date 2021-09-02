@@ -10,3 +10,9 @@ The main goal of this repository is to practice with the following things:
 - Continuous Integration with Github Actions
 - Data Structures and their implementation in C
 - Linux dynamic libraries
+
+LIFO (Last-In-First-Out)
+Also called stack
+
+Initialization
+...

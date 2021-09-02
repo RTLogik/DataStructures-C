@@ -30,19 +30,19 @@ LIFO_Status LIFO_Is_Full(LIFO_t *lbuf)
         return errorCheck;
 
     if (lbuf->width == 1) {
-        if ( (uint8_t *)lbuf->head >= ((uint8_t *)lbuf->base + lbuf->length - 1) ) {
+        if ( (uint8_t *)lbuf->head >= ((uint8_t *)lbuf->base + lbuf->length) ) {
             return LIFO_FULL;
         } else {
             return LIFO_NOT_FULL;
         }
     } else if (lbuf->width == 2) {
-        if ( (uint16_t *)lbuf->head >= ((uint16_t *)lbuf->base + lbuf->length - 1) ) {
+        if ( (uint16_t *)lbuf->head >= ((uint16_t *)lbuf->base + lbuf->length) ) {
             return LIFO_FULL;
         } else {
             return LIFO_NOT_FULL;
         }
     } else if (lbuf->width == 4) {
-        if ( (uint32_t *)lbuf->head >= ((uint32_t *)lbuf->base + lbuf->length - 1) ) {
+        if ( (uint32_t *)lbuf->head >= ((uint32_t *)lbuf->base + lbuf->length) ) {
             return LIFO_FULL;
         } else {
             return LIFO_NOT_FULL;
@@ -72,18 +72,19 @@ LIFO_Status LIFO_Push(LIFO_t *lbuf, uint32_t item2push)
         return fullCheck;
 
     if (lbuf->width == 1) {
-        (uint8_t *)lbuf->head++;
         (*(uint8_t *)lbuf->head) = (uint8_t)item2push;
+        (uint8_t *)lbuf->head++;
         return LIFO_OK;
     } else if (lbuf->width == 2) {
-        (uint16_t *)lbuf->head++;
         (*(uint16_t *)lbuf->head) = (uint16_t)item2push;
+        lbuf->head = lbuf->head + 2;
         return LIFO_OK;
     } else if (lbuf->width == 4) {
-        (uint32_t *)lbuf->head++;
         (*(uint32_t *)lbuf->head) = (uint32_t)item2push;
+        lbuf->head = lbuf->head + 4;
         return LIFO_OK;
     }
+
 }
 
 LIFO_Status LIFO_Pop(LIFO_t *lbuf, uint32_t *item2pop)
@@ -94,12 +95,15 @@ LIFO_Status LIFO_Pop(LIFO_t *lbuf, uint32_t *item2pop)
         return emptyCheck;
 
     if (lbuf->width == 1) {
+        (uint8_t *)lbuf->head--;
         (*(uint8_t *)item2pop) = (*(uint8_t *)lbuf->head);
         return LIFO_OK;
     } else if (lbuf->width == 2) {
+        lbuf->head = (lbuf->head - 2);
         (*(uint16_t *)item2pop) = (*(uint16_t *)lbuf->head);
         return LIFO_OK;
     } else if (lbuf->width == 4) {
+        lbuf->head = (lbuf->head - 4);
         (*item2pop) = (*(uint32_t *)lbuf->head);
         return LIFO_OK;
     }
@@ -111,7 +115,7 @@ LIFO_Status LIFO_Init(LIFO_t *lbuf)
         lbuf->width = 1;
         lbuf->base = malloc(lbuf->length);
         if ( ! lbuf->base ) { return LIFO_INIT_ERROR; }
-        lbuf->head = lbuf->base;
+        lbuf->head = lbuf->base - 1;
         return LIFO_OK;
     } else if (lbuf->width == 2) {
         lbuf->width = 2;

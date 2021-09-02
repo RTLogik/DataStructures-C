@@ -7,6 +7,7 @@
 #define _DATASTR_H_
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #include "lifo.h"
 

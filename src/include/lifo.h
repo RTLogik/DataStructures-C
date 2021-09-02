@@ -19,8 +19,8 @@ typedef enum {
 } LIFO_Status;
 
 typedef struct {
+    size_t length;
     uint8_t width;
-    uint8_t length;
     void   *base;
     void   *head;
 } LIFO_t;
