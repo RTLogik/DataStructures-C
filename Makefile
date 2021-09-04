@@ -40,8 +40,9 @@ RESULTS = $(PATHR)test_info.txt
 CC = gcc
 LINK = gcc
 DEPEND = gcc -MM -MG -MF
-CFLAGS = -c -Wall
+CFLAGS = -c -Wall --coverage
 CPPFLAGS = -I. -I$(PATHU) -I$(PATHS)include
+LDFLAGS = --coverage
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL   = `grep -s FAIL $(PATHR)*.txt`
@@ -62,7 +63,7 @@ $(RESULTS): $(TEST_TARGET)
 	-./$< > $@ 2>&1
 
 $(TEST_TARGET): $(OBJS) $(OBJST) $(OBJSU) #$(PATHD)test_%.d
-	$(LINK) -o $@ $^
+	$(LINK) $(LDFLAGS) -o $@ $^
 
 $(PATHO)test_%.o:: $(PATHT)test_%.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
@@ -91,9 +92,9 @@ $(PATHR):
 
 .PHONY: clean
 clean:
-	rm -f $(PATHO)*.o
+	rm -f $(PATHO)*
 	rm -f $(PATHB)*.out
-	rm -f $(PATHR)*.txt
+	rm -f $(PATHR)*
 
 # Tell Make not to erase intermediate files:
 .PRECIOUS: $(PATHB)%.out
