@@ -28,3 +28,5 @@ jobs:
         flags: unittest
         fail_ci_if_error: true
         verbose: true
+    - name: The job has succeeded
+      if: ${{ success() }}
