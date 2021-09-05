@@ -41,7 +41,7 @@ CC = gcc
 LINK = gcc
 DEPEND = gcc -MM -MG -MF
 CFLAGS = -c -Wall --coverage
-CPPFLAGS = -I. -I$(PATHU) -I$(PATHS)include
+CPPFLAGS = -I. -I$(PATHU) -Iinclude
 LDFLAGS = --coverage
 
 PASSED = `grep -s PASS $(PATHR)*.txt`
