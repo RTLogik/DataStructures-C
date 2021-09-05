@@ -18,6 +18,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Make and run tests
       run: make test
+    - name: Check tests
+      run: if grep -q FAIL build/results/test_info.txt; then echo "::error::At least 1 test failed"; fi
     - name: Get coverage report
       run: sudo .github/scripts/get_code_cov.sh
     - name: Upload coverage report to Codecov 
