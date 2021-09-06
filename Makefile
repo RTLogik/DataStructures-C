@@ -60,7 +60,7 @@ test: $(BUILD_PATHS) $(RESULTS)
 
 
 $(RESULTS): $(TEST_TARGET)
-	-./$< > $@ 2>&1
+	-./$< -v > $@ 2>&1
 
 $(TEST_TARGET): $(OBJS) $(OBJST) $(OBJSU) #$(PATHD)test_%.d
 	$(LINK) $(LDFLAGS) -o $@ $^
