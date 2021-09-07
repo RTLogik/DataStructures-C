@@ -54,4 +54,4 @@ Antonio Gomez Navarro - contact@rtlogik.com
 Check my [website](www.rtlogik.com)!
 
 -----------
-_Distributed under the MIT License. See LICENSE for more information._
+_Distributed under the MIT License. See `LICENSE` for more information._
