@@ -1,12 +1,22 @@
-/*
- * lifo.h
- * by rtlogik
+/**
+ * @file lifo.h
+ * @author rtlogik (contact@rtlogik.com)
+ * @brief LIFO (Last-In-First-Out)
+ * @version 0.1
+ * @date 2021-09-07
+ * 
+ * 
  */
 
 #ifndef _LIFO_H_
 #define _LIFO_H_
 
-/************** DATA TYPES **************/
+/**
+ * @brief LIFO Status
+ * 
+ * This enumeration is used as a return value for all of the functions
+ * 
+ */
 typedef enum {
     LIFO_OK = 0,
     LIFO_WIDTH_ERROR,
