@@ -10,7 +10,6 @@ Detailed description. Bla bla blaDetailed description. Bla bla blaDetailed descr
 Detailed description. Bla bla blaDetailed description. Bla bla blaDetailed description. Bla bla blaDetailed description. Bla bla bla
 
 ## Features
------------
 This library is made with optimization in mind, heap and stack bla bla.
 
 
@@ -21,7 +20,6 @@ The data structures present are:
 * ...
 
 ## Installation
----------------
 To get a local copy up and running follow these simple steps.
 ### Prerequisites
 This library is built with GNU GCC and Make so it's assumed that you are using a Linux distro and have those installed. 
@@ -43,7 +41,6 @@ Additionally, you can run `make tests` and `make docs`
 
 
 ## Usage
---------
 Link to _documentation_
 ### LIFO
 - Initialization:
@@ -52,7 +49,6 @@ LIFO_t lbuf = malloc(sizeof(LIFO_t))
 ```
 
 ## Author
----------
 Antonio Gomez Navarro - contact@rtlogik.com
 
 Check my [website](www.rtlogik.com)!
