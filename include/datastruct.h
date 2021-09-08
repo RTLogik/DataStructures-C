@@ -3,12 +3,12 @@
  * by rtlogik
  */
 
-#ifndef _DATASTR_H_
-#define _DATASTR_H_
+#ifndef _DATASTRUCT_H_
+#define _DATASTRUCT_H_
 
 #include <stdint.h>
 #include <stdlib.h>
 
 #include "lifo.h"
 
-#endif /* _DATASTR_H_ */
+#endif /* _DATASTRUCT_H_ */
