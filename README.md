@@ -14,9 +14,10 @@ This library is made with optimization in mind, heap and stack bla bla.
 
 
 The data structures present are:
-* [LIFO (also called Stack)](#lifo)
-* FIFO (also called Queue)
+* Stack
+* Queue
 * Linked List
+* Binary Tree
 * ...
 
 ## Installation
@@ -41,12 +42,7 @@ Additionally, you can run `make tests` and `make docs`
 
 
 ## Usage
-Link to _documentation_
-### LIFO
-- Initialization:
-```c
-LIFO_t lbuf = malloc(sizeof(LIFO_t))
-```
+Link to _wiki_
 
 ## Author
 Antonio Gomez Navarro - contact@rtlogik.com
