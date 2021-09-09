@@ -20,7 +20,7 @@ TEST_TEAR_DOWN(lifo)
 
 TEST(lifo, InitializeLIFOinHeap)
 {
-    LIFO_t *lbuf;
+    LIFO_t lbuf;
     LIFO_Status status = LIFO_Init(lbuf, 20);
     TEST_ASSERT_EQUAL_INT(0,status);
 }
@@ -28,7 +28,7 @@ TEST(lifo, InitializeLIFOinHeap)
 
 TEST(lifo, InitializeLIFOinHeapWrong)
 {
-    int *lbuf;
+    int lbuf;
     LIFO_Status status = LIFO_Init(lbuf, 20);
     TEST_ASSERT_EQUAL_INT(0,status);
 }
@@ -54,7 +54,7 @@ TEST(lifo, InitializeLIFOinHeapWrong)
 TEST(lifo, PushPopLIFOinHeap)
 {
     int popItem;
-    LIFO_t * lbuf;
+    LIFO_t lbuf;
     LIFO_Init(lbuf, 20);
 
     LIFO_Push(lbuf, 24);
@@ -88,7 +88,7 @@ TEST(lifo, PushPopLIFOinHeap)
 
 TEST(lifo, PushBeyondLimits)
 {
-    LIFO_t * lbuf;
+    LIFO_t lbuf;
     LIFO_Init(lbuf, 5);
 
     for(int i = 0; i < 5; i++) {

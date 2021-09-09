@@ -4,14 +4,14 @@
 
 #include "datastruct.h"
 
-struct LIFO{
+struct LIFO {
     int  length;
     int *base;
     int *head;
 };
 
 /* Check if pointers are valid */
-static LIFO_Status LIFO_Check(LIFO_t *lbuf)
+static LIFO_Status LIFO_Check(LIFO_t lbuf)
 {
     if ( ! lbuf || ! lbuf->head || ! lbuf->base ) {
         return LIFO_NULL;
@@ -19,8 +19,9 @@ static LIFO_Status LIFO_Check(LIFO_t *lbuf)
     return LIFO_OK;
 }
 
-LIFO_Status LIFO_Init(LIFO_t *lbuf, int length) 
+LIFO_Status LIFO_Init(LIFO_t lbuf, int length) 
 {
+    lbuf = malloc(sizeof(int)*3);
     lbuf->length = length;
     lbuf->base = malloc(sizeof(int) * length);
     if ( ! lbuf->base ) { return LIFO_INIT_ERROR; }
@@ -28,7 +29,7 @@ LIFO_Status LIFO_Init(LIFO_t *lbuf, int length)
     return LIFO_OK;
 }
 
-LIFO_Status LIFO_Is_Full(LIFO_t *lbuf)
+LIFO_Status LIFO_Is_Full(LIFO_t lbuf)
 {
     // Check for errors:
     LIFO_Status status = LIFO_Check(lbuf);
@@ -41,7 +42,7 @@ LIFO_Status LIFO_Is_Full(LIFO_t *lbuf)
         return LIFO_NOT_FULL;
 }
 
-LIFO_Status LIFO_Is_Empty(LIFO_t *lbuf)
+LIFO_Status LIFO_Is_Empty(LIFO_t lbuf)
 {
     // Check for errors:
     LIFO_Status status = LIFO_Check(lbuf);
@@ -54,7 +55,7 @@ LIFO_Status LIFO_Is_Empty(LIFO_t *lbuf)
         return LIFO_NOT_EMPTY;
 }
 
-LIFO_Status LIFO_Push(LIFO_t *lbuf, int item2push) 
+LIFO_Status LIFO_Push(LIFO_t lbuf, int item2push) 
 {
     // Check if buffer is full: (refactorizar)
     LIFO_Status fullCheck = LIFO_Is_Full(lbuf);
@@ -66,7 +67,7 @@ LIFO_Status LIFO_Push(LIFO_t *lbuf, int item2push)
     return LIFO_OK;
 }
 
-LIFO_Status LIFO_Pop(LIFO_t *lbuf, int *item2pop)
+LIFO_Status LIFO_Pop(LIFO_t lbuf, int *item2pop)
 {
     // Check if buffer is empty: (refactorizar)
     LIFO_Status emptyCheck = LIFO_Is_Empty(lbuf);
@@ -78,7 +79,7 @@ LIFO_Status LIFO_Pop(LIFO_t *lbuf, int *item2pop)
     return LIFO_OK;
 }
 
-LIFO_Status LIFO_Delete(LIFO_t *lbuf)
+inline LIFO_Status LIFO_Delete(LIFO_t lbuf)
 {
     free(lbuf->base);
 }
