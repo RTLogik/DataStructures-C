@@ -4,20 +4,20 @@
 
 #include "unity_fixture.h"
 
-TEST_GROUP_RUNNER(lifo)
+TEST_GROUP_RUNNER(stack)
 {
-    RUN_TEST_CASE(lifo, InitializeLIFOinHeap);
-    RUN_TEST_CASE(lifo, InitializeLIFOinHeapWrong);
-    //RUN_TEST_CASE(lifo, InitializeLIFOinStack);
-    //RUN_TEST_CASE(lifo, InitializeLIFOinStackWrong);
-    RUN_TEST_CASE(lifo, PushPopLIFOinHeap);
-    //RUN_TEST_CASE(lifo, PushPopLIFOinStack);
-    RUN_TEST_CASE(lifo, PushBeyondLimits);
+    RUN_TEST_CASE(stack, InitializeStackInHeap);
+    RUN_TEST_CASE(stack, InitializeStackInHeapWrong);
+    //RUN_TEST_CASE(stack, InitializeStackInStack);
+    //RUN_TEST_CASE(stack, InitializeStackInStackWrong);
+    RUN_TEST_CASE(stack, PushPopStackInHeap);
+    //RUN_TEST_CASE(stack, PushPopStackInStack);
+    RUN_TEST_CASE(stack, PushBeyondLimits);
 }
 
 static void RunAllTests(void)
 {
-    RUN_TEST_GROUP(lifo);
+    RUN_TEST_GROUP(stack);
 }
 
 int main(int argc, char * argv[])
