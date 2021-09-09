@@ -15,14 +15,25 @@ static StackStatus_e Stack_Check(Stack_t buffer)
     return STACK_OK;
 }
 
-StackStatus_e Stack_Init(Stack_t buffer, int length) 
+StackStatus_e Stack_Init(Stack_t *bufferPtr, int length) 
 {
-    buffer = malloc(sizeof(int)*3);
-    buffer->length = length;
-    buffer->base = malloc(sizeof(int) * length);
-    if ( ! buffer->base ) { return STACK_INIT_ERROR; }
-    buffer->head = buffer->base;
+    if (length > MAX_STACK_SIZE)
+        return STACK_LENGTH_ERROR;
+
+    *bufferPtr = malloc(sizeof(struct StackStruct));
+    (*bufferPtr)->length = length;
+    (*bufferPtr)->base = malloc(sizeof(int) * length);
+    if ( ! (*bufferPtr)->base ) 
+        return STACK_INIT_ERROR; 
+
+    (*bufferPtr)->head = (*bufferPtr)->base;
     return STACK_OK;
+}
+
+StackStatus_e Stack_Delete(Stack_t *bufferPtr)
+{
+    free((*bufferPtr)->base);
+    free(*bufferPtr);
 }
 
 StackStatus_e Stack_Is_Full(Stack_t buffer)
@@ -75,7 +86,20 @@ StackStatus_e Stack_Pop(Stack_t buffer, int *item2pop)
     return STACK_OK;
 }
 
-StackStatus_e Stack_Delete(Stack_t buffer)
+StackStatus_e Stack_Peek(Stack_t buffer, int *item2peek)
 {
-    free(buffer->base);
+    // Check if buffer is empty: (refactorizar)
+    StackStatus_e emptyCheck = Stack_Is_Empty(buffer);
+    if ( Stack_Is_Empty(buffer) != STACK_NOT_EMPTY ) 
+        return emptyCheck;
+
+    buffer->head--;
+    *item2peek = *(buffer->head);
+    buffer->head++;
+    return STACK_OK;
+}
+
+int Stack_Size(Stack_t buffer)
+{
+    return (buffer->head - buffer->base);
 }

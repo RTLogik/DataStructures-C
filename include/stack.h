@@ -22,6 +22,7 @@
 typedef enum {
     STACK_OK = 0,
     STACK_INIT_ERROR,
+    STACK_LENGTH_ERROR,
     STACK_EMPTY,
     STACK_NOT_EMPTY,
     STACK_FULL,
@@ -32,12 +33,14 @@ typedef enum {
 typedef struct StackStruct *Stack_t;
 
 /************** STACK INTERFACE **************/
-StackStatus_e Stack_Init(Stack_t buffer, int length); // Constructor
+StackStatus_e Stack_Init(Stack_t *bufferPtr, int length);  // Constructor
+StackStatus_e Stack_Delete(Stack_t *bufferPtr);            // Destructor
 StackStatus_e Stack_Is_Full(Stack_t buffer);
 StackStatus_e Stack_Is_Empty(Stack_t buffer);
 StackStatus_e Stack_Push(Stack_t buffer, int item2push);
 StackStatus_e Stack_Pop(Stack_t buffer, int * item2pop);
-StackStatus_e Stack_Delete(Stack_t buffer);  // Destructor
+StackStatus_e Stack_Peek(Stack_t buffer, int * item2peek);
+int Stack_Size(Stack_t buffer);
 // peek() - only get the upper element (without popping)
 // size() - returns the size of the buffer
 
