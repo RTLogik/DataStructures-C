@@ -1,115 +1,106 @@
-/**
- * peek stack/heap
- * size stack/heap
- * pop beyond limits
- * PushPop in the limits
- */
 
 #include "unity_fixture.h"
 #include "stack.h"
 
 TEST_GROUP(stack);
 
+Stack_t buffer;
+
 TEST_SETUP(stack)
 {
-    
+    //Stack_Init(&buffer, 10, NULL);
 }
 
 TEST_TEAR_DOWN(stack)
 {
-    
+    //Stack_Delete(&buffer);
 }
 
 TEST(stack, InitializeStackDynamically)
 {
-    Stack_t buffer;
-    StackStatus_e status = Stack_Init(&buffer, 20);
-    TEST_ASSERT_EQUAL_INT(0,status);
+    TEST_ASSERT_EQUAL_INT(STACK_OK, Stack_Init(&buffer, 20, NULL));
 }
 
 
 TEST(stack, InitializeStackDynamicallyWrong)
 {
-    Stack_t buffer;
-    StackStatus_e status = Stack_Init(&buffer, MAX_STACK_SIZE+1);
-    TEST_ASSERT_EQUAL_INT(2,status);
+    TEST_ASSERT_EQUAL_INT(STACK_LENGTH_ERROR, 
+                          Stack_Init(&buffer, MAX_STACK_SIZE+1, NULL));
 }
 
-// TEST(Stack, InitializeStackStatically)
-// {
-//     int mem[20];
-//     Stack_t buffer;
-//     StackStatus_e status = Stack_Init(&buffer, 20, mem);
-//     TEST_ASSERT_EQUAL_INT(0,status);
-// }
-
-// TEST(Stack, InitializeStackStaticallyWrong)
-// {
-//     Stack_t buffer;
-//     buffer.length = 5;
-//     buffer.width  = 7;
-//     StackStatus_e status = Stack_Init(&buffer);
-//     TEST_ASSERT_EQUAL_INT(1,status);
-// }
+TEST(stack, InitializeStackStatically)
+{
+    int mem[20];
+    TEST_ASSERT_EQUAL_INT(STACK_OK, Stack_Init(&buffer, 20, mem));
+}
 
 TEST(stack, PushPopStackDynamically)
 {
     int popItem;
-    Stack_t buffer;
-    Stack_Init(&buffer, 20);
 
-    Stack_Push(buffer, 24);
-    Stack_Push(buffer, 8);
-    Stack_Push(buffer, 88);
+    Stack_Init(&buffer, 10, NULL);
+
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 2);
+    Stack_Push(buffer, 3);
 
     Stack_Pop(buffer,&popItem);
-    TEST_ASSERT_EQUAL_INT(88,popItem);
+    TEST_ASSERT_EQUAL_INT(3,popItem);
     Stack_Pop(buffer,&popItem);
-    TEST_ASSERT_EQUAL_INT(8,popItem);
+    TEST_ASSERT_EQUAL_INT(2,popItem);
     Stack_Pop(buffer,&popItem);
-    TEST_ASSERT_EQUAL_INT(24,popItem);
+    TEST_ASSERT_EQUAL_INT(1,popItem);
 }
 
-// TEST(Stack, PushPopStackStatically)
-// {
-//     uint32_t popItem;
-//     Stack_t buffer;
-//     buffer.length = 5;
-//     buffer.width  = 4;
-//     Stack_Init(&buffer);
-//     Stack_Push(&buffer, 24);
-//     Stack_Push(&buffer, 8);
-//     Stack_Push(&buffer, 88);
-//     Stack_Pop(&buffer,&popItem);
-//     TEST_ASSERT_EQUAL_INT32(88,popItem);
-//     Stack_Pop(&buffer,&popItem);
-//     TEST_ASSERT_EQUAL_INT32(8,popItem);
-//     Stack_Pop(&buffer,&popItem);
-//     TEST_ASSERT_EQUAL_INT32(24,popItem);
-// }
+TEST(stack, PushPopStackStatically)
+{
+    int popItem;
+    int mem[5];
+    Stack_Init(&buffer, 5, mem);
+
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 2);
+    Stack_Push(buffer, 3);
+
+    Stack_Pop(buffer,&popItem);
+    TEST_ASSERT_EQUAL_INT(3,popItem);
+    Stack_Pop(buffer,&popItem);
+    TEST_ASSERT_EQUAL_INT(2,popItem);
+    Stack_Pop(buffer,&popItem);
+    TEST_ASSERT_EQUAL_INT(1,popItem);
+}
 
 TEST(stack, PushBeyondLimits)
 {
-    Stack_t buffer;
-    Stack_Init(&buffer, 5);
+    Stack_Init(&buffer, 10, NULL);
 
-    for(int i = 0; i < 5; i++) {
-        if (Stack_Push(buffer, 10) == STACK_FULL) {
+    for(int i = 0; i < 10; i++) {
+        if (Stack_Push(buffer, 1) == STACK_FULL) {
             char str[30];
             sprintf(str, "Full before time, length=%d",i);
             TEST_FAIL_MESSAGE(str);
         }
     }
     
-    StackStatus_e status = Stack_Push(buffer, 10);
+    StackStatus_e status = Stack_Push(buffer, 1);
     TEST_ASSERT_EQUAL_INT(STACK_FULL, status);
+}
+
+TEST(stack, PopBeyondLimits)
+{
+    int tmp;
+
+    Stack_Init(&buffer, 5, NULL);
+
+    TEST_ASSERT_EQUAL_INT(STACK_EMPTY, Stack_Peek(buffer, NULL));
+    TEST_ASSERT_EQUAL_INT(STACK_EMPTY, Stack_Pop(buffer, NULL));
 }
 
 TEST(stack, StackPeek)
 {
     int peekItem, tmp;
-    Stack_t buffer;
-    Stack_Init(&buffer, 20);
+    
+    Stack_Init(&buffer, 5, NULL);
 
     Stack_Push(buffer, 8);
     Stack_Push(buffer, 88);
@@ -125,17 +116,16 @@ TEST(stack, StackPeek)
 
 TEST(stack, SizeOfStack)
 {
-    int peekItem, tmp;
-    Stack_t buffer;
-    Stack_Init(&buffer, 20);
+    Stack_Init(&buffer, 10, NULL);
 
-    Stack_Push(buffer, 8);
-    Stack_Push(buffer, 8);
-    Stack_Push(buffer, 8);
-    Stack_Push(buffer, 8);
-    Stack_Push(buffer, 8);
-    Stack_Push(buffer, 8);
+    TEST_ASSERT_EQUAL_INT(0, Stack_Size(buffer));  
+
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 1);
 
     TEST_ASSERT_EQUAL_INT(6, Stack_Size(buffer));    
-
 }

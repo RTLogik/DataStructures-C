@@ -33,7 +33,7 @@ typedef enum {
 typedef struct StackStruct *Stack_t;
 
 /************** STACK INTERFACE **************/
-StackStatus_e Stack_Init(Stack_t *bufferPtr, int length);  // Constructor
+StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory);  // Constructor
 StackStatus_e Stack_Delete(Stack_t *bufferPtr);            // Destructor
 StackStatus_e Stack_Is_Full(Stack_t buffer);
 StackStatus_e Stack_Is_Empty(Stack_t buffer);

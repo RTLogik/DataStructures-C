@@ -15,18 +15,24 @@ static StackStatus_e Stack_Check(Stack_t buffer)
     return STACK_OK;
 }
 
-StackStatus_e Stack_Init(Stack_t *bufferPtr, int length) 
+StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory) 
 {
     if (length > MAX_STACK_SIZE)
         return STACK_LENGTH_ERROR;
 
     *bufferPtr = malloc(sizeof(struct StackStruct));
     (*bufferPtr)->length = length;
-    (*bufferPtr)->base = malloc(sizeof(int) * length);
-    if ( ! (*bufferPtr)->base ) 
-        return STACK_INIT_ERROR; 
+
+    if (memory == NULL) {
+        (*bufferPtr)->base = malloc(sizeof(int) * length);
+        if ( ! (*bufferPtr)->base ) 
+            return STACK_INIT_ERROR; 
+    } else {
+        (*bufferPtr)->base = memory;
+    }
 
     (*bufferPtr)->head = (*bufferPtr)->base;
+
     return STACK_OK;
 }
 
