@@ -17,9 +17,17 @@ TEST_GROUP_RUNNER(stack)
     RUN_TEST_CASE(stack, SizeOfStack);
 }
 
+TEST_GROUP_RUNNER(queue)
+{
+    RUN_TEST_CASE(queue, InitializeQueueDynamically);
+    RUN_TEST_CASE(queue, InitializeQueueDynamicallyWrong);
+    RUN_TEST_CASE(queue, InitializeQueueStatically); 
+}
+
 static void RunAllTests(void)
 {
     RUN_TEST_GROUP(stack);
+    RUN_TEST_GROUP(queue);
 }
 
 int main(int argc, char * argv[])

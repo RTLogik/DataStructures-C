@@ -9,5 +9,6 @@
 #include <stdlib.h>
 
 #include "stack.h"
+#include "queue.h"
 
 #endif /* _DATASTRUCTS_H_ */
