@@ -13,12 +13,13 @@ TEST_SETUP(stack)
 
 TEST_TEAR_DOWN(stack)
 {
-    //Stack_Delete(&buffer);
+    //Stack_Delete(buffer);
 }
 
 TEST(stack, InitializeStackDynamically)
 {
     TEST_ASSERT_EQUAL_INT(STACK_OK, Stack_Init(&buffer, 20, NULL));
+    Stack_Delete(buffer);
 }
 
 
@@ -32,6 +33,7 @@ TEST(stack, InitializeStackStatically)
 {
     int mem[20];
     TEST_ASSERT_EQUAL_INT(STACK_OK, Stack_Init(&buffer, 20, mem));
+    Stack_Delete(buffer);
 }
 
 TEST(stack, PushPopStackDynamically)
@@ -88,8 +90,6 @@ TEST(stack, PushBeyondLimits)
 
 TEST(stack, PopBeyondLimits)
 {
-    int tmp;
-
     Stack_Init(&buffer, 5, NULL);
 
     TEST_ASSERT_EQUAL_INT(STACK_EMPTY, Stack_Peek(buffer, NULL));

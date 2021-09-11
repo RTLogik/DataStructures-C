@@ -5,6 +5,7 @@
 #
 # Targets:
 #	   <FILE.o> - Build <FILE.o> object file
+#      all      - Builds the library, run tests and generate documentation
 #      build    - Builds and generates libdata.a library
 #      test     - Run unit tests (run all tests by default)
 #      clean    - Removes all generated files
@@ -47,6 +48,9 @@ LDFLAGS = --coverage
 PASSED = `grep -s PASS $(PATHR)*.txt`
 FAIL   = `grep -s FAIL $(PATHR)*.txt`
 IGNORE = `grep -s IGNORE $(PATHR)*.txt`
+
+.PHONY: all
+all: test doc
 
 .PHONY: test
 test: $(BUILD_PATHS) $(RESULTS)
