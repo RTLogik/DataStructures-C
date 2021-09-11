@@ -1,19 +1,20 @@
 #-------------------------------------------------------------------------
-#      --- Makefile used for building and testing datastr-lib ---
+#      --- Makefile used for building and testing datastructs lib ---
 # 
 # Use: make [targets] (test-option)
 #
 # Targets:
 #	   <FILE.o> - Build <FILE.o> object file
-#      all      - Builds the library, run tests and generate documentation
-#      build    - Builds and generates libdata.a library
+#      build    - Builds and generates libdatastructs.a library
 #      test     - Run unit tests (run all tests by default)
+#      doc      - Generate Doxygen documentation (in doc/ folder)
+#      all      - Builds the library, run tests and generate documentation
 #      clean    - Removes all generated files
 #
 # Test options:
 #      lifo - Run lifo tests
 #
-# By rtlogik
+# Author: agnavarro (rtlogik) - contact@rtlogik.com
 #-------------------------------------------------------------------------
 
 # Specify Paths:
@@ -24,6 +25,7 @@ PATHB = build/
 PATHD = build/depends/
 PATHO = build/objs/
 PATHR = build/results/
+PATHDOC = doc/
 
 BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
 
@@ -50,7 +52,11 @@ FAIL   = `grep -s FAIL $(PATHR)*.txt`
 IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
 .PHONY: all
-all: test doc
+all: doc test
+
+.PHONY: doc
+doc: $(PATHDOC)Doxyfile
+	doxygen $(PATHDOC)Doxyfile
 
 .PHONY: test
 test: $(BUILD_PATHS) $(RESULTS)
@@ -99,6 +105,8 @@ clean:
 	rm -f $(PATHO)*
 	rm -f $(PATHB)*.out
 	rm -f $(PATHR)*
+	rm -rf $(PATHDOC)html/* && rmdir $(PATHDOC)html/
+
 
 # Tell Make not to erase intermediate files:
 .PRECIOUS: $(PATHB)%.out
