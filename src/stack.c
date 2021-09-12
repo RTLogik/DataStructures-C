@@ -77,10 +77,10 @@ StackStatus_e Stack_Is_Empty(Stack_t buffer)
 
 StackStatus_e Stack_Push(Stack_t buffer, int item2push) 
 {
-    // Check if buffer is full: (refactorizar)
-    StackStatus_e fullCheck = Stack_Is_Full(buffer);
-    if ( Stack_Is_Full(buffer) != STACK_NOT_FULL ) 
-        return fullCheck;
+    // Check if buffer is full: 
+    StackStatus_e check = Stack_Is_Full(buffer);
+    if (check != STACK_NOT_FULL) 
+        return check;
         
     *(buffer->head) = item2push; 
     buffer->head++;
@@ -89,10 +89,10 @@ StackStatus_e Stack_Push(Stack_t buffer, int item2push)
 
 StackStatus_e Stack_Pop(Stack_t buffer, int *item2pop)
 {
-    // Check if buffer is empty: (refactorizar)
-    StackStatus_e emptyCheck = Stack_Is_Empty(buffer);
-    if ( Stack_Is_Empty(buffer) != STACK_NOT_EMPTY ) 
-        return emptyCheck;
+    // Check if buffer is empty: 
+    StackStatus_e check = Stack_Is_Empty(buffer);
+    if (check != STACK_NOT_EMPTY) 
+        return check;
 
     buffer->head--;
     *item2pop = *(buffer->head);

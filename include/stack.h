@@ -39,8 +39,8 @@ void Stack_Delete(Stack_t buffer);
 StackStatus_e Stack_Is_Full(Stack_t buffer);
 StackStatus_e Stack_Is_Empty(Stack_t buffer);
 StackStatus_e Stack_Push(Stack_t buffer, int item2push);
-StackStatus_e Stack_Pop(Stack_t buffer, int * item2pop);
-StackStatus_e Stack_Peek(Stack_t buffer, int * item2peek);
+StackStatus_e Stack_Pop(Stack_t buffer, int *item2pop);
+StackStatus_e Stack_Peek(Stack_t buffer, int *item2peek);
 int Stack_Size(Stack_t buffer);
 
 #endif /* _STACK_H_ */
