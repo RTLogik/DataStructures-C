@@ -30,7 +30,7 @@ PATHDOC = doc/
 BUILD_PATHS = $(PATHB) $(PATHD) $(PATHO) $(PATHR)
 
 # Specify Targets, Source Files and Objects:
-TARGET = $(PATHB)libdatastr.a
+TARGET = $(PATHB)libdatastructs.a
 TEST_TARGET = $(PATHB)test_runner.out
 SRC   = $(wildcard $(PATHS)*.c)
 SRCT  = $(wildcard $(PATHT)*.c)
@@ -43,6 +43,7 @@ RESULTS = $(PATHR)test_info.txt
 CC = gcc
 LINK = gcc
 DEPEND = gcc -MM -MG -MF
+ARCHIVE = ar cr
 CFLAGS = -c -Wall --coverage
 CPPFLAGS = -I. -I$(PATHU) -Iinclude
 LDFLAGS = --coverage
@@ -52,7 +53,11 @@ FAIL   = `grep -s FAIL $(PATHR)*.txt`
 IGNORE = `grep -s IGNORE $(PATHR)*.txt`
 
 .PHONY: all
-all: doc test
+all: lib test doc 
+
+.PHONY: lib
+lib: $(OBJS)
+	$(ARCHIVE) $(TARGET) $(OBJS)
 
 .PHONY: doc
 doc: $(PATHDOC)Doxyfile
@@ -105,6 +110,7 @@ clean:
 	rm -f $(PATHO)*
 	rm -f $(PATHB)*.out
 	rm -f $(PATHR)*
+	rm -f $(PATHB)*.a
 	rm -rf $(PATHDOC)html/* && rmdir $(PATHDOC)html/
 
 
