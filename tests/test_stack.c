@@ -114,7 +114,7 @@ TEST(stack, StackPeek)
     TEST_ASSERT_EQUAL_INT(STACK_EMPTY, Stack_Peek(buffer,&peekItem));    
 }
 
-TEST(stack, SizeOfStack)
+TEST(stack, StackSize)
 {
     Stack_Init(&buffer, 10, NULL);
 

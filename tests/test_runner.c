@@ -14,7 +14,7 @@ TEST_GROUP_RUNNER(stack)
     RUN_TEST_CASE(stack, PushBeyondLimits);
     RUN_TEST_CASE(stack, PopBeyondLimits);
     RUN_TEST_CASE(stack, StackPeek);
-    RUN_TEST_CASE(stack, SizeOfStack);
+    RUN_TEST_CASE(stack, StackSize);
 }
 
 TEST_GROUP_RUNNER(queue)
@@ -25,6 +25,7 @@ TEST_GROUP_RUNNER(queue)
     RUN_TEST_CASE(queue, AddRemoveQueueDynamically); 
     RUN_TEST_CASE(queue, AddBeyondLimits); 
     RUN_TEST_CASE(queue, RemoveBeyondLimits); 
+    RUN_TEST_CASE(queue, QueuePeek);
     RUN_TEST_CASE(queue, QueueSize); 
 }
 
