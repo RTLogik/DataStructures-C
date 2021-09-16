@@ -62,10 +62,10 @@ doc: $(PATHDOC)Doxyfile
 test: $(BUILD_PATHS) $(RESULTS)
 	@echo "-----------------------\nIGNORES:\n-----------------------"
 	@echo "$(IGNORE)"
-	@echo "-----------------------\nFAILURES:\n-----------------------"
-	@echo "$(FAIL)"
 	@echo "-----------------------\nPASSED:\n-----------------------"
 	@echo "$(PASSED)"
+	@echo "-----------------------\nFAILURES:\n-----------------------"
+	@echo "$(FAIL)"
 	@echo "\nDONE"
 
 
