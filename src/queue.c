@@ -4,6 +4,7 @@ typedef enum {STATIC, DYNAMIC} QueueType_e;
 
 struct QueueStruct {
     int  length;
+    int  count;
     int *base;
     int *tail;
     int *head;
@@ -58,8 +59,7 @@ QueueStatus_e Queue_Is_Full(Queue_t buffer)
     if (status != QUEUE_OK) 
         return QUEUE_NULL;
 
-    if ( (buffer->tail == buffer->head + 1) ||
-         (buffer->head == buffer->tail + (buffer->length - 1)) ) {
+    if (buffer->count == buffer->length) {
         return QUEUE_FULL;
     } else {
         return QUEUE_NOT_FULL;
@@ -73,10 +73,10 @@ QueueStatus_e Queue_Is_Empty(Queue_t buffer)
     if (status != QUEUE_OK) 
         return QUEUE_NULL;
 
-    if (buffer->tail == buffer->head) {
-        return QUEUE_FULL;
+    if (buffer->count == 0) {
+        return QUEUE_EMPTY;
     } else {
-        return QUEUE_NOT_FULL;
+        return QUEUE_NOT_EMPTY;
     }
 }
 
@@ -86,14 +86,15 @@ QueueStatus_e Queue_Add(Queue_t buffer, int item2add)
     QueueStatus_e check = Queue_Is_Full(buffer);
     if (check != QUEUE_NOT_FULL) 
         return check;
+    
+    *(buffer->head) = item2add;
+    buffer->count++;
 
-    if ( buffer->head == buffer->head + (buffer->length -1) ) {
+    if ( buffer->head == buffer->base + buffer->length ) {
         buffer->head = buffer->base;
     } else {
         buffer->head++;
     }
-
-    *(buffer->head) = item2add;
 
     return QUEUE_OK;
 }
@@ -105,13 +106,31 @@ QueueStatus_e Queue_Remove(Queue_t buffer, int *item2remove)
     if (check != QUEUE_NOT_EMPTY) 
         return check;
     
-    *item2remove = *(buffer->head);
+    *item2remove = *(buffer->tail);
+    buffer->count--;
 
-    if ( buffer->tail == buffer->tail + (buffer->length -1) ) {
+    if ( buffer->tail == buffer->base + buffer->length ) {
         buffer->tail = buffer->base;
     } else {
         buffer->tail++;
     }
     
     return QUEUE_OK;
+}
+
+QueueStatus_e Queue_Peek(Queue_t buffer, int *item2peek) 
+{
+    // Check if buffer is empty:
+    QueueStatus_e check = Queue_Is_Empty(buffer);
+    if (check != QUEUE_NOT_EMPTY) 
+        return check;
+    
+    *item2peek = *(buffer->tail);
+    
+    return QUEUE_OK;
+}
+
+int Queue_Size(Queue_t buffer)
+{
+    return buffer->count;
 }

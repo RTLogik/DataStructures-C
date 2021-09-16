@@ -23,6 +23,9 @@ TEST_GROUP_RUNNER(queue)
     RUN_TEST_CASE(queue, InitializeQueueDynamicallyWrong);
     RUN_TEST_CASE(queue, InitializeQueueStatically); 
     RUN_TEST_CASE(queue, AddRemoveQueueDynamically); 
+    RUN_TEST_CASE(queue, AddBeyondLimits); 
+    RUN_TEST_CASE(queue, RemoveBeyondLimits); 
+    RUN_TEST_CASE(queue, QueueSize); 
 }
 
 static void RunAllTests(void)
