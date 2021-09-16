@@ -31,7 +31,7 @@ QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory)
     if (memory == NULL) {
         (*bufferPtr)->base = malloc(sizeof(int) * length);
         if ( ! (*bufferPtr)->base ) 
-            return STACK_INIT_ERROR; 
+            return QUEUE_INIT_ERROR; 
         (*bufferPtr)->queueType = DYNAMIC;
     } else {
         (*bufferPtr)->base = memory;
@@ -41,7 +41,7 @@ QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory)
     (*bufferPtr)->head = (*bufferPtr)->base;
     (*bufferPtr)->tail = (*bufferPtr)->base;
 
-    return STACK_OK;
+    return QUEUE_OK;
 }
 
 void Queue_Delete(Queue_t buffer)
