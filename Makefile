@@ -5,7 +5,7 @@
 #
 # Targets:
 #	   <FILE.o> - Build <FILE.o> object file
-#      build    - Builds and generates libdatastructs.a library
+#      lib      - Builds and generates libdatastructs.a library
 #      test     - Run unit tests (run all tests by default)
 #      doc      - Generate Doxygen documentation (in doc/ folder)
 #      all      - Builds the library, run tests and generate documentation
