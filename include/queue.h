@@ -42,7 +42,7 @@ QueueStatus_e Queue_Is_Full(Queue_t buffer);
 QueueStatus_e Queue_Is_Empty(Queue_t buffer);
 QueueStatus_e Queue_Add(Queue_t buffer, int item2add);
 QueueStatus_e Queue_Remove(Queue_t buffer, int *item2remove);
-QueueStatus_e Queue_Remove_Index(Queue_t buffer, int *item2remove, int index);
+QueueStatus_e Queue_Peek_Index(Queue_t buffer, int *item2peek, int index);
 QueueStatus_e Queue_Peek(Queue_t buffer, int *item2peek);
 int Queue_Size(Queue_t buffer);
 
