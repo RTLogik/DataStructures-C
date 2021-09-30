@@ -93,6 +93,29 @@ TEST(queue, RemoveBeyondLimits)
     TEST_ASSERT_EQUAL_INT(QUEUE_EMPTY, Queue_Remove(buffer, &item));
 }
 
+TEST(queue, QueueClear)
+{
+    int item;
+    Queue_Init(&buffer, 5, NULL);
+
+    Queue_Add(buffer, 1);
+    Queue_Add(buffer, 2);
+    Queue_Add(buffer, 3);
+
+    Queue_Clear(buffer);
+    TEST_ASSERT_EQUAL_INT(QUEUE_EMPTY, Queue_Remove(buffer, &item));
+
+    // Add beyond limits check:
+    TEST_ASSERT_EQUAL_INT(QUEUE_OK,   Queue_Add(buffer, 1));
+    TEST_ASSERT_EQUAL_INT(QUEUE_OK,   Queue_Add(buffer, 1));
+    TEST_ASSERT_EQUAL_INT(QUEUE_OK,   Queue_Remove(buffer, &item));
+    TEST_ASSERT_EQUAL_INT(QUEUE_OK,   Queue_Add(buffer, 1));
+    TEST_ASSERT_EQUAL_INT(QUEUE_OK,   Queue_Add(buffer, 1));
+    TEST_ASSERT_EQUAL_INT(QUEUE_OK,   Queue_Add(buffer, 1));
+    TEST_ASSERT_EQUAL_INT(QUEUE_OK,   Queue_Add(buffer, 1));
+    TEST_ASSERT_EQUAL_INT(QUEUE_FULL, Queue_Add(buffer, 1));
+}
+
 TEST(queue, QueuePeek)
 {
     int item;
@@ -103,6 +126,25 @@ TEST(queue, QueuePeek)
     TEST_ASSERT_EQUAL_INT(55, item);
     Queue_Remove(buffer, &item);
     TEST_ASSERT_EQUAL_INT(55, item);
+}
+
+TEST(queue, QueuePeekIndex)
+{
+    int item;
+    Queue_Init(&buffer, 10, NULL);
+
+    Queue_Add(buffer, 1);
+    Queue_Add(buffer, 2);
+    Queue_Add(buffer, 3);
+
+    Queue_Peek_Index(buffer, &item, 0);
+    TEST_ASSERT_EQUAL_INT(1, item);
+    Queue_Peek_Index(buffer, &item, 1);
+    TEST_ASSERT_EQUAL_INT(2, item);
+    Queue_Peek_Index(buffer, &item, 2);
+    TEST_ASSERT_EQUAL_INT(3, item);
+    TEST_ASSERT_EQUAL(QUEUE_INDEX_ERROR, Queue_Peek_Index(buffer, &item, 3));
+    TEST_ASSERT_EQUAL_INT(0, item);
 }
 
 TEST(queue, QueueSize)

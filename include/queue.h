@@ -37,7 +37,7 @@ typedef struct QueueStruct *Queue_t;
 /************** QUEUE INTERFACE **************/
 QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory); 
 void Queue_Delete(Queue_t buffer);  
-QueueStatus_e Queue_Clear(Queue_t buffer);          
+void Queue_Clear(Queue_t buffer);          
 QueueStatus_e Queue_Is_Full(Queue_t buffer);
 QueueStatus_e Queue_Is_Empty(Queue_t buffer);
 QueueStatus_e Queue_Add(Queue_t buffer, int item2add);

@@ -40,6 +40,7 @@ QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory)
 
     (*bufferPtr)->head = (*bufferPtr)->base;
     (*bufferPtr)->tail = (*bufferPtr)->base;
+    (*bufferPtr)->count = 0;
 
     return QUEUE_OK;
 }
@@ -50,6 +51,13 @@ void Queue_Delete(Queue_t buffer)
         free(buffer->base);
     }
     free(buffer);
+}
+
+void Queue_Clear(Queue_t buffer)
+{
+    buffer->head = buffer->base;
+    buffer->tail = buffer->base;
+    buffer->count = 0;
 }
 
 QueueStatus_e Queue_Is_Full(Queue_t buffer)
@@ -126,6 +134,22 @@ QueueStatus_e Queue_Peek(Queue_t buffer, int *item2peek)
         return check;
     
     *item2peek = *(buffer->tail);
+    
+    return QUEUE_OK;
+}
+
+QueueStatus_e Queue_Peek_Index(Queue_t buffer, int *item2peek, int index) 
+{
+    if (index > buffer->count) {
+        return QUEUE_INDEX_ERROR;
+    }
+    else if ( buffer->tail + index > buffer->base + buffer->length ) {
+        *item2peek = *(buffer->base + (buffer->length - index));
+    } else {
+        *item2peek = *(buffer->tail);
+    }    
+
+    
     
     return QUEUE_OK;
 }
