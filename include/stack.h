@@ -37,7 +37,7 @@ typedef struct StackStruct *Stack_t;
 /************** STACK INTERFACE **************/
 StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory); 
 void Stack_Delete(Stack_t buffer);   
-StackStatus_e Stack_Clear(Stack_t buffer);      
+void Stack_Clear(Stack_t buffer);      
 StackStatus_e Stack_Is_Full(Stack_t buffer);
 StackStatus_e Stack_Is_Empty(Stack_t buffer);
 StackStatus_e Stack_Push(Stack_t buffer, int item2push);
