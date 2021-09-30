@@ -23,6 +23,7 @@ typedef enum {
     QUEUE_OK = 0,
     QUEUE_INIT_ERROR,
     QUEUE_LENGTH_ERROR,
+    QUEUE_INDEX_ERROR,
     QUEUE_EMPTY,
     QUEUE_NOT_EMPTY,
     QUEUE_FULL,
@@ -35,11 +36,13 @@ typedef struct QueueStruct *Queue_t;
 
 /************** QUEUE INTERFACE **************/
 QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory); 
-void Queue_Delete(Queue_t buffer);            
+void Queue_Delete(Queue_t buffer);  
+QueueStatus_e Queue_Clear(Queue_t buffer);          
 QueueStatus_e Queue_Is_Full(Queue_t buffer);
 QueueStatus_e Queue_Is_Empty(Queue_t buffer);
 QueueStatus_e Queue_Add(Queue_t buffer, int item2add);
 QueueStatus_e Queue_Remove(Queue_t buffer, int *item2remove);
+QueueStatus_e Queue_Remove_Index(Queue_t buffer, int *item2remove, int index);
 QueueStatus_e Queue_Peek(Queue_t buffer, int *item2peek);
 int Queue_Size(Queue_t buffer);
 
