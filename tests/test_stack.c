@@ -1,4 +1,3 @@
-
 #include "unity_fixture.h"
 #include "stack.h"
 
@@ -96,6 +95,19 @@ TEST(stack, PopBeyondLimits)
     TEST_ASSERT_EQUAL_INT(STACK_EMPTY, Stack_Pop(buffer, NULL));
 }
 
+TEST(stack, StackClear)
+{
+    int item;
+    Stack_Init(&buffer, 5, NULL);
+
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 2);
+    Stack_Push(buffer, 3);
+
+    Stack_Clear(buffer);
+    TEST_ASSERT_EQUAL_INT(STACK_EMPTY, Stack_Pop(buffer, &item));
+}
+
 TEST(stack, StackPeek)
 {
     int peekItem, tmp;
@@ -112,6 +124,26 @@ TEST(stack, StackPeek)
     TEST_ASSERT_EQUAL_INT(8,peekItem);
     Stack_Pop(buffer,&tmp);
     TEST_ASSERT_EQUAL_INT(STACK_EMPTY, Stack_Peek(buffer,&peekItem));    
+}
+
+TEST(stack, StackPeekIndex)
+{
+    int peekItem, tmp;
+    
+    Stack_Init(&buffer, 5, NULL);
+
+    Stack_Push(buffer, 1);
+    Stack_Push(buffer, 2);
+    Stack_Push(buffer, 3);
+
+    Stack_Peek_Index(buffer, &peekItem, 0);
+    TEST_ASSERT_EQUAL_INT(1, peekItem);
+    Stack_Peek_Index(buffer, &peekItem, 1);
+    TEST_ASSERT_EQUAL_INT(2, peekItem);
+    Stack_Peek_Index(buffer, &peekItem, 2);
+    TEST_ASSERT_EQUAL_INT(3, peekItem);
+    TEST_ASSERT_EQUAL_INT(STACK_INDEX_ERROR, Stack_Peek_Index(buffer, &peekItem, 3)); 
+    TEST_ASSERT_EQUAL_INT(0, peekItem);
 }
 
 TEST(stack, StackSize)

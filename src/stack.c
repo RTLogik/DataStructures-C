@@ -49,6 +49,11 @@ void Stack_Delete(Stack_t buffer)
     free(buffer);
 }
 
+void Stack_Clear(Stack_t buffer)
+{
+    buffer->head = buffer->base;
+}
+
 StackStatus_e Stack_Is_Full(Stack_t buffer)
 {
     // Check for errors:
@@ -106,9 +111,20 @@ StackStatus_e Stack_Peek(Stack_t buffer, int *item2peek)
     if ( Stack_Is_Empty(buffer) != STACK_NOT_EMPTY ) 
         return emptyCheck;
 
-    buffer->head--;
-    *item2peek = *(buffer->head);
-    buffer->head++;
+    *item2peek = *(buffer->head - 1);
+
+    return STACK_OK;
+}
+
+StackStatus_e Stack_Peek_Index(Stack_t buffer, int *item2peek, int index)
+{
+    if (index >= Stack_Size(buffer)) {
+        *item2peek = 0;
+        return STACK_INDEX_ERROR;
+    }
+        
+    *item2peek = *(buffer->base + index);
+
     return STACK_OK;
 }
 

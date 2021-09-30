@@ -13,7 +13,9 @@ TEST_GROUP_RUNNER(stack)
     RUN_TEST_CASE(stack, PushPopStackStatically);
     RUN_TEST_CASE(stack, PushBeyondLimits);
     RUN_TEST_CASE(stack, PopBeyondLimits);
+    RUN_TEST_CASE(stack, StackClear);
     RUN_TEST_CASE(stack, StackPeek);
+    RUN_TEST_CASE(stack, StackPeekIndex);
     RUN_TEST_CASE(stack, StackSize);
 }
 
@@ -25,14 +27,30 @@ TEST_GROUP_RUNNER(queue)
     RUN_TEST_CASE(queue, AddRemoveQueueDynamically); 
     RUN_TEST_CASE(queue, AddBeyondLimits); 
     RUN_TEST_CASE(queue, RemoveBeyondLimits); 
+    //RUN_TEST_CASE(queue, QueueClear);
     RUN_TEST_CASE(queue, QueuePeek);
+    //RUN_TEST_CASE(queue, QueuePeekIndex);
     RUN_TEST_CASE(queue, QueueSize); 
+}
+
+TEST_GROUP_RUNNER(list)
+{
+    // RUN_TEST_CASE(list, InitializeListDynamically);
+    // RUN_TEST_CASE(list, InitializeListDynamicallyWrong);
+    // RUN_TEST_CASE(list, InitializeListStatically); 
+    // RUN_TEST_CASE(list, AddRemoveListDynamically); 
+    // RUN_TEST_CASE(list, AddBeyondLimits); 
+    // RUN_TEST_CASE(list, RemoveBeyondLimits); 
+    // RUN_TEST_CASE(list, HeadPeek);
+    // RUN_TEST_CASE(list, TailPeek);
+    // RUN_TEST_CASE(list, ListSize); 
 }
 
 static void RunAllTests(void)
 {
     RUN_TEST_GROUP(stack);
     RUN_TEST_GROUP(queue);
+    RUN_TEST_GROUP(list);
 }
 
 int main(int argc, char * argv[])
