@@ -33,24 +33,17 @@ TEST_GROUP_RUNNER(queue)
     RUN_TEST_CASE(queue, QueueSize); 
 }
 
-TEST_GROUP_RUNNER(list)
+TEST_GROUP_RUNNER(linked_list)
 {
-    // RUN_TEST_CASE(list, InitializeListDynamically);
-    // RUN_TEST_CASE(list, InitializeListDynamicallyWrong);
-    // RUN_TEST_CASE(list, InitializeListStatically); 
-    // RUN_TEST_CASE(list, AddRemoveListDynamically); 
-    // RUN_TEST_CASE(list, AddBeyondLimits); 
-    // RUN_TEST_CASE(list, RemoveBeyondLimits); 
-    // RUN_TEST_CASE(list, HeadPeek);
-    // RUN_TEST_CASE(list, TailPeek);
-    // RUN_TEST_CASE(list, ListSize); 
+    RUN_TEST_CASE(linked_list, ListInitialize);
+    RUN_TEST_CASE(linked_list, ListInitializeWrong);
 }
 
 static void RunAllTests(void)
 {
     RUN_TEST_GROUP(stack);
     RUN_TEST_GROUP(queue);
-    RUN_TEST_GROUP(list);
+    RUN_TEST_GROUP(linked_list);
 }
 
 int main(int argc, char * argv[])
