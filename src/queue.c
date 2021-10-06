@@ -1,6 +1,6 @@
 #include "datastructs.h"
 
-typedef enum {STATIC, DYNAMIC} QueueType_e;
+typedef enum {STATIC, DYNAMIC} QueueMemory_e;
 
 struct QueueStruct {
     int  length;
@@ -8,7 +8,7 @@ struct QueueStruct {
     int *base;
     int *tail;
     int *head;
-    QueueType_e queueType;
+    QueueMemory_e queueMemory;
 };
 
 /* Check if pointers are valid */
@@ -32,10 +32,10 @@ QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory)
         (*bufferPtr)->base = malloc(sizeof(int) * length);
         if ( ! (*bufferPtr)->base ) 
             return QUEUE_INIT_ERROR; 
-        (*bufferPtr)->queueType = DYNAMIC;
+        (*bufferPtr)->queueMemory = DYNAMIC;
     } else {
         (*bufferPtr)->base = memory;
-        (*bufferPtr)->queueType = STATIC;
+        (*bufferPtr)->queueMemory = STATIC;
     }
 
     (*bufferPtr)->head = (*bufferPtr)->base;
@@ -47,7 +47,7 @@ QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory)
 
 void Queue_Delete(Queue_t buffer)
 {
-    if (buffer->queueType == DYNAMIC) {
+    if (buffer->queueMemory == DYNAMIC) {
         free(buffer->base);
     }
     free(buffer);

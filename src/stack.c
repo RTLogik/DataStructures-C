@@ -1,12 +1,12 @@
 #include "datastructs.h"
 
-typedef enum {STATIC, DYNAMIC} StackType_e;
+typedef enum {STATIC, DYNAMIC} StackMemory_e;
 
 struct StackStruct {
     int  length;
     int *base;
     int *head;
-    StackType_e stackType;
+    StackMemory_e stackMemory;
 };
 
 /* Check if pointers are valid */
@@ -30,10 +30,10 @@ StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory)
         (*bufferPtr)->base = malloc(sizeof(int) * length);
         if ( ! (*bufferPtr)->base ) 
             return STACK_INIT_ERROR; 
-        (*bufferPtr)->stackType = DYNAMIC;
+        (*bufferPtr)->stackMemory = DYNAMIC;
     } else {
         (*bufferPtr)->base = memory;
-        (*bufferPtr)->stackType = STATIC;
+        (*bufferPtr)->stackMemory = STATIC;
     }
 
     (*bufferPtr)->head = (*bufferPtr)->base;
@@ -43,7 +43,7 @@ StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory)
 
 void Stack_Delete(Stack_t buffer)
 {
-    if (buffer->stackType == DYNAMIC) {
+    if (buffer->stackMemory == DYNAMIC) {
         free(buffer->base);
     }
     free(buffer);
