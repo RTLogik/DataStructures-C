@@ -128,7 +128,7 @@ TEST(stack, StackPeek)
 
 TEST(stack, StackPeekIndex)
 {
-    int peekItem, tmp;
+    int peekItem;
     
     Stack_Init(&buffer, 5, NULL);
 
