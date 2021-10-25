@@ -1,4 +1,7 @@
-#include "datastructs.h"
+
+#include <stdlib.h>
+
+#include "queue.h"
 
 typedef enum {STATIC, DYNAMIC} QueueMemory_e;
 
