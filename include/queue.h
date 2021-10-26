@@ -5,8 +5,8 @@
  * 
  */
 
-#ifndef _QUEUE_H_
-#define _QUEUE_H_
+#ifndef DATASTRUCTS_QUEUE_H
+#define DATASTRUCTS_QUEUE_H
 
 /**
  * Defines the maximum size of the queue buffer
@@ -46,4 +46,4 @@ QueueStatus_e Queue_Peek_Index(Queue_t buffer, int *item2peek, int index);
 QueueStatus_e Queue_Peek(Queue_t buffer, int *item2peek);
 int Queue_Size(Queue_t buffer);
 
-#endif /* _QUEUE_H_ */
+#endif /* DATASTRUCTS_QUEUE_H */

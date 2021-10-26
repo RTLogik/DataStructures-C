@@ -5,8 +5,8 @@
  * 
  */
 
-#ifndef _STACK_H_
-#define _STACK_H_
+#ifndef DATASTRUCTS_STACK_H
+#define DATASTRUCTS_STACK_H
 
 /**
  * Defines the maximum size of the stack buffer
@@ -46,4 +46,4 @@ StackStatus_e Stack_Peek(Stack_t buffer, int *item2peek);
 StackStatus_e Stack_Peek_Index(Stack_t buffer, int *item2peek, int index);
 int Stack_Size(Stack_t buffer);
 
-#endif /* _STACK_H_ */
+#endif /* DATASTRUCTS_STACK_H */
