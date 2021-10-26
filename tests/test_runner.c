@@ -35,8 +35,9 @@ TEST_GROUP_RUNNER(queue)
 
 TEST_GROUP_RUNNER(linked_list)
 {
-    RUN_TEST_CASE(linked_list, ListInitialize);
-    RUN_TEST_CASE(linked_list, ListInitializeWrong);
+    RUN_TEST_CASE(linked_list, InitializeList);
+    RUN_TEST_CASE(linked_list, InitializeListWrong);
+    RUN_TEST_CASE(linked_list, AddAndPeekFirst);
 }
 
 static void RunAllTests(void)
