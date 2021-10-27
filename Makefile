@@ -108,11 +108,8 @@ $(RESULTS): $(TEST_TARGET)
 $(TEST_TARGET): $(OBJS)
 	$(LINK) $(LDFLAGS) -o $@ $^
 
-$(OBJS_PATH)%.o:: $(TESTS_PATH)%.c		          # COMPROBAR SI PUEDO QUITAR EL TEST_
+$(OBJS_PATH)%.o:: $(TESTS_PATH)%.c		          
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
-
-#$(OBJS_PATH)run_test.o:: $(TESTS_PATH)run_test.c    # COMPROBAR SI PUEDO BORRAR!! Y LOS ::
-#	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
 
 $(OBJS_PATH)%.o:: $(UNITY_PATH)%.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
