@@ -134,7 +134,7 @@ $(DEBUG_PATH)%.o:: $(SRC_PATH)%.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DBGFLAGS) $< -o $@
 
 $(DEBUG_PATH)%.o:: $(UNITY_PATH)%.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(DBGFLAGS) $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
 
 $(DEBUG_PATH):
 	mkdir -p $(DEBUG_PATH)
