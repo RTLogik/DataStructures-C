@@ -36,6 +36,7 @@ typedef struct DoublyNodeStruct {
 } *DNode;
 
 static SNode Create_SNode(void *pItem, int itemSize);
+static SNode Find_Penultimate(List_t list);
 static DNode Create_DNode(void *pItem, int itemSize);
 static ListStatus_e List_Add_Singly_NotCircular(List_t list, NodePosition_e pos, void *pItem);
 static ListStatus_e List_Add_Singly_Circular(List_t list, NodePosition_e pos, void *pItem);
@@ -137,14 +138,14 @@ ListStatus_e List_Peek_First(List_t list, void *pItem)
     if (list->listType == SINGLY_NOT_CIRCULAR || 
         list->listType == SINGLY_CIRCULAR) {
         
-        SNode node = (SNode)list->firstNode;
-        memcpy(pItem, node->item, list->itemSize);
+        SNode first = (SNode)list->firstNode;
+        memcpy(pItem, first->item, list->itemSize);
     
     } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
                list->listType == DOUBLY_CIRCULAR) {
 
-        DNode node = (DNode)list->firstNode;
-        memcpy(pItem, node->item, list->itemSize);
+        DNode first = (DNode)list->firstNode;
+        memcpy(pItem, first->item, list->itemSize);
     }
 
     return LIST_OK;
@@ -159,18 +160,125 @@ ListStatus_e List_Peek_Last(List_t list, void *pItem)
     if (list->listType == SINGLY_NOT_CIRCULAR || 
         list->listType == SINGLY_CIRCULAR) {
         
-        SNode node = (SNode)list->lastNode;
-        memcpy(pItem, node->item, list->itemSize);
+        SNode last = (SNode)list->lastNode;
+        memcpy(pItem, last->item, list->itemSize);
     
     } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
                list->listType == DOUBLY_CIRCULAR) {
 
-        DNode node = (DNode)list->lastNode;
-        memcpy(pItem, node->item, list->itemSize);
+        DNode last = (DNode)list->lastNode;
+        memcpy(pItem, last->item, list->itemSize);
     }
 
     return LIST_OK;
 }
+
+ListStatus_e List_Remove_First(List_t list, void *pItem)
+{
+        /* Check list size */
+    if (List_Size(list) == 0)
+        return LIST_EMPTY;
+
+    if (list->listType == SINGLY_NOT_CIRCULAR || 
+        list->listType == SINGLY_CIRCULAR) {
+
+        /*Save node item */
+        SNode first = (SNode)list->firstNode;
+        memcpy(pItem, first->item, list->itemSize);
+
+        /* Update pointers */
+        if (first->next == NULL) {
+            list->firstNode = NULL;
+            list->lastNode = NULL;
+        } else {
+            list->firstNode = first->next;
+            if (list->listType == SINGLY_CIRCULAR) {
+                SNode last = (SNode)list->lastNode;
+                last->next = list->firstNode;
+            }
+        }
+
+        free(first);
+ 
+    } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
+               list->listType == DOUBLY_CIRCULAR) {
+
+        /* Save node item */
+        DNode first = (DNode)list->firstNode;
+        memcpy(pItem, first->item, list->itemSize);
+
+        /* Update pointers */
+        if (first->next == NULL) {
+            list->firstNode = NULL;
+            list->lastNode = NULL;
+        } else {
+            DNode second = (DNode)first->next;
+            if (list->listType == DOUBLY_CIRCULAR) {
+                second->previous = list->lastNode;
+                DNode last = (DNode)list->lastNode;
+                last->next = second;
+            } else {
+                second->previous = NULL;
+            }
+            list->firstNode = second;
+        }
+
+        free(first);
+    }
+
+    return LIST_OK;
+}
+
+ListStatus_e List_Remove_Last(List_t list, void *pItem)
+{
+    /* Check list size */
+    if (List_Size(list) == 0)
+        return LIST_EMPTY;
+
+    if (list->listType == SINGLY_NOT_CIRCULAR || 
+        list->listType == SINGLY_CIRCULAR) {     
+
+        /* Save node item */
+        SNode last = (SNode)list->lastNode;
+        memcpy(pItem, last->item, list->itemSize);
+
+        /* Update pointers */
+        SNode penultimate = Find_Penultimate(list);
+        list->lastNode = penultimate;
+        if (list->listType == SINGLY_CIRCULAR) {
+            penultimate->next = list->firstNode;
+        } else {
+            penultimate->next = NULL;
+        }
+
+        free(last);
+    
+    } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
+               list->listType == DOUBLY_CIRCULAR) {
+
+        /* Save node item */
+        DNode last = (DNode)list->lastNode;
+        memcpy(pItem, last->item, list->itemSize);
+
+        /* Update pointers */
+        if (last->previous != NULL && last->previous != list->lastNode) {
+            DNode penultimate = last->previous;
+            list->lastNode = penultimate;
+            if (list->listType == DOUBLY_CIRCULAR) {
+                DNode first = list->firstNode;
+                first->previous = penultimate;
+                penultimate->next = first;
+            } else {
+                penultimate->next = NULL;
+            }
+        }
+
+        free(last);
+    }
+
+    return LIST_OK;    
+}
+
 
 static ListStatus_e List_Add_Singly_NotCircular(List_t list, NodePosition_e pos, void *pItem)
 {
@@ -262,6 +370,7 @@ static ListStatus_e List_Add_Doubly_Circular(List_t list, NodePosition_e pos, vo
     if (list->firstNode == NULL) {    // Not initialized list
         newNode->next = NULL;
         newNode->previous = NULL;
+        list->firstNode = newNode;
         list->lastNode = newNode;
     } else {
         DNode last = list->lastNode;
@@ -319,4 +428,17 @@ static DNode Create_DNode(void *pItem, int itemSize)
     memcpy(newNode->item, pItem, itemSize);
 
     return newNode;
+}
+
+static SNode Find_Penultimate(List_t list) 
+{
+    SNode node = list->firstNode;
+    SNode previousNode = node;
+
+    while (node != list->lastNode) {
+        previousNode = node;
+        node = node->next;
+    }
+
+    return previousNode;
 }

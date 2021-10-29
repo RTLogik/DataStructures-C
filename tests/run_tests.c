@@ -37,10 +37,10 @@ TEST_GROUP_RUNNER(linked_list)
 {
     RUN_TEST_CASE(linked_list, InitializeList);
     RUN_TEST_CASE(linked_list, InitializeListWrong);
-    RUN_TEST_CASE(linked_list, AddAndPeekSinglyNotCircular);
-    // RUN_TEST_CASE(linked_list, AddAndPeekSinglyCircular);
-    // RUN_TEST_CASE(linked_list, AddAndPeekDoublyNotCircular);
-    // RUN_TEST_CASE(linked_list, AddAndPeekDoublyCircular);
+    RUN_TEST_CASE(linked_list, AddPeekRemoveSinglyNotCircular);
+    RUN_TEST_CASE(linked_list, AddPeekRemoveSinglyCircular);
+    RUN_TEST_CASE(linked_list, AddPeekRemoveDoublyNotCircular);
+    RUN_TEST_CASE(linked_list, AddPeekRemoveDoublyCircular);
 }
 
 static void RunAllTests(void)
