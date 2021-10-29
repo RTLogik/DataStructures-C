@@ -29,7 +29,7 @@ TEST_GROUP_RUNNER(queue)
     RUN_TEST_CASE(queue, RemoveBeyondLimits); 
     RUN_TEST_CASE(queue, QueueClear);
     RUN_TEST_CASE(queue, QueuePeek);
-    //RUN_TEST_CASE(queue, QueuePeekIndex);
+    RUN_TEST_CASE(queue, QueuePeekIndex);
     RUN_TEST_CASE(queue, QueueSize); 
 }
 
@@ -37,7 +37,10 @@ TEST_GROUP_RUNNER(linked_list)
 {
     RUN_TEST_CASE(linked_list, InitializeList);
     RUN_TEST_CASE(linked_list, InitializeListWrong);
-    RUN_TEST_CASE(linked_list, AddAndPeekFirst);
+    RUN_TEST_CASE(linked_list, AddAndPeekSinglyNotCircular);
+    // RUN_TEST_CASE(linked_list, AddAndPeekSinglyCircular);
+    // RUN_TEST_CASE(linked_list, AddAndPeekDoublyNotCircular);
+    // RUN_TEST_CASE(linked_list, AddAndPeekDoublyCircular);
 }
 
 static void RunAllTests(void)
