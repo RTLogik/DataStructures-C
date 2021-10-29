@@ -47,8 +47,7 @@ typedef struct ListStruct *List_t;
 
 /************** LIST INTERFACE **************/
 ListStatus_e List_Init(List_t *listPtr, int itemSize, int listType); 
-void List_Delete(List_t list);            
-void List_Clear(List_t list);            
+void List_Delete(List_t list);                      
 ListStatus_e List_Add_First(List_t list, void *pItem);
 ListStatus_e List_Add_Last(List_t list, void *pItem);
 ListStatus_e List_Add_After(List_t list, void *pItem, int index);
