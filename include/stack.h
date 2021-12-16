@@ -2,7 +2,7 @@
  * @file stack.h
  * @author rtlogik - contact@rtlogik.com
  * @brief Stack Interface Header
- * 
+ *
  */
 
 #ifndef DATASTRUCTS_STACK_H
@@ -15,9 +15,9 @@
 
 /**
  * @brief Stack Status Enumeration
- * 
+ *
  * This enumeration is used as a return value for all of the functions
- * 
+ *
  */
 typedef enum {
     STACK_OK = 0,
@@ -35,9 +35,9 @@ typedef enum {
 typedef struct StackStruct *Stack_t;
 
 /************** STACK INTERFACE **************/
-StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory); 
-void Stack_Delete(Stack_t buffer);   
-void Stack_Clear(Stack_t buffer);      
+StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory);
+void Stack_Delete(Stack_t buffer);
+void Stack_Clear(Stack_t buffer);
 StackStatus_e Stack_Is_Full(Stack_t buffer);
 StackStatus_e Stack_Is_Empty(Stack_t buffer);
 StackStatus_e Stack_Push(Stack_t buffer, int item2push);

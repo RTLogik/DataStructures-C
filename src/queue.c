@@ -33,8 +33,8 @@ QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory)
 
     if (memory == NULL) {
         (*bufferPtr)->base = malloc(sizeof(int) * length);
-        if ( ! (*bufferPtr)->base ) 
-            return QUEUE_INIT_ERROR; 
+        if ( ! (*bufferPtr)->base )
+            return QUEUE_INIT_ERROR;
         (*bufferPtr)->queueMemory = DYNAMIC;
     } else {
         (*bufferPtr)->base = memory;
@@ -67,7 +67,7 @@ QueueStatus_e Queue_Is_Full(Queue_t buffer)
 {
     // Check for errors:
     QueueStatus_e status = Queue_Check(buffer);
-    if (status != QUEUE_OK) 
+    if (status != QUEUE_OK)
         return QUEUE_NULL;
 
     if (buffer->count == buffer->length) {
@@ -81,7 +81,7 @@ QueueStatus_e Queue_Is_Empty(Queue_t buffer)
 {
     // Check for errors:
     QueueStatus_e status = Queue_Check(buffer);
-    if (status != QUEUE_OK) 
+    if (status != QUEUE_OK)
         return QUEUE_NULL;
 
     if (buffer->count == 0) {
@@ -95,9 +95,9 @@ QueueStatus_e Queue_Add(Queue_t buffer, int item2add)
 {
     // Check if buffer is full:
     QueueStatus_e check = Queue_Is_Full(buffer);
-    if (check != QUEUE_NOT_FULL) 
+    if (check != QUEUE_NOT_FULL)
         return check;
-    
+
     *(buffer->head) = item2add;
     buffer->count++;
 
@@ -114,9 +114,9 @@ QueueStatus_e Queue_Remove(Queue_t buffer, int *item2remove)
 {
     // Check if buffer is empty:
     QueueStatus_e check = Queue_Is_Empty(buffer);
-    if (check != QUEUE_NOT_EMPTY) 
+    if (check != QUEUE_NOT_EMPTY)
         return check;
-    
+
     *item2remove = *(buffer->tail);
     buffer->count--;
 
@@ -125,23 +125,23 @@ QueueStatus_e Queue_Remove(Queue_t buffer, int *item2remove)
     } else {
         buffer->tail++;
     }
-    
+
     return QUEUE_OK;
 }
 
-QueueStatus_e Queue_Peek(Queue_t buffer, int *item2peek) 
+QueueStatus_e Queue_Peek(Queue_t buffer, int *item2peek)
 {
     // Check if buffer is empty:
     QueueStatus_e check = Queue_Is_Empty(buffer);
-    if (check != QUEUE_NOT_EMPTY) 
+    if (check != QUEUE_NOT_EMPTY)
         return check;
-    
+
     *item2peek = *(buffer->tail);
-    
+
     return QUEUE_OK;
 }
 
-QueueStatus_e Queue_Peek_Index(Queue_t buffer, int *item2peek, int index) 
+QueueStatus_e Queue_Peek_Index(Queue_t buffer, int *item2peek, int index)
 {
     if (index > buffer->count) {
         return QUEUE_INDEX_ERROR;
@@ -150,10 +150,10 @@ QueueStatus_e Queue_Peek_Index(Queue_t buffer, int *item2peek, int index)
         *item2peek = *(buffer->base + (buffer->length - index));
     } else {
         *item2peek = *(buffer->tail);
-    }    
+    }
 
-    
-    
+
+
     return QUEUE_OK;
 }
 

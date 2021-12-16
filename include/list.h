@@ -2,7 +2,7 @@
  * @file list.h
  * @author rtlogik - contact@rtlogik.com
  * @brief Linked List Interface Header
- * 
+ *
  */
 
 #ifndef DATASTRUCTS_LIST_H
@@ -25,9 +25,9 @@
 
 /**
  * @brief List Status Enumeration
- * 
+ *
  * This enumeration is used as a return value for all of the functions
- * 
+ *
  */
 typedef enum {
     LIST_OK = 0,
@@ -46,8 +46,8 @@ typedef enum {
 typedef struct ListStruct *List_t;
 
 /************** LIST INTERFACE **************/
-ListStatus_e List_Init(List_t *listPtr, int itemSize, int listType); 
-void List_Delete(List_t list);                      
+ListStatus_e List_Init(List_t *listPtr, int itemSize, int listType);
+void List_Delete(List_t list);
 ListStatus_e List_Add_First(List_t list, void *pItem);
 ListStatus_e List_Add_Last(List_t list, void *pItem);
 ListStatus_e List_Add_After(List_t list, void *pItem, int index);

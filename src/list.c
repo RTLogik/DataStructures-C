@@ -41,21 +41,21 @@ static DNode Create_DNode(void *pItem, int itemSize);
 static ListStatus_e List_Add_Singly_NotCircular(List_t list, NodePosition_e pos, void *pItem);
 static ListStatus_e List_Add_Singly_Circular(List_t list, NodePosition_e pos, void *pItem);
 static ListStatus_e List_Add_Doubly_NotCircular(List_t list, NodePosition_e pos, void *pItem);
-static ListStatus_e List_Add_Doubly_Circular(List_t list, NodePosition_e pos, void *pItem);                                                                                                
+static ListStatus_e List_Add_Doubly_Circular(List_t list, NodePosition_e pos, void *pItem);
 
 
-ListStatus_e List_Init(List_t *listPtr, int itemSize, int listType) 
+ListStatus_e List_Init(List_t *listPtr, int itemSize, int listType)
 {
-    if (itemSize > MAX_ITEM_SIZE) 
+    if (itemSize > MAX_ITEM_SIZE)
         return LIST_SIZE_ERROR;
 
     *listPtr = malloc(sizeof(struct ListStruct));
-    if (listPtr == NULL) 
+    if (listPtr == NULL)
         return LIST_INIT_ERROR;
 
-    if ( listType == (SINGLY_CIRCULAR)     ||  
-         listType == (DOUBLY_CIRCULAR)     || 
-         listType == (SINGLY_NOT_CIRCULAR) || 
+    if ( listType == (SINGLY_CIRCULAR)     ||
+         listType == (DOUBLY_CIRCULAR)     ||
+         listType == (SINGLY_NOT_CIRCULAR) ||
          listType == (DOUBLY_NOT_CIRCULAR) ) {
         (*listPtr)->listType = listType;
     } else {
@@ -76,7 +76,7 @@ void List_Delete(List_t list)
 }
 
 ListStatus_e List_Add_First(List_t list, void *pItem)
-{   
+{
     /* Check list size */
     if (List_Size(list) >= MAX_LIST_SIZE)
         return LIST_FULL;
@@ -93,11 +93,11 @@ ListStatus_e List_Add_First(List_t list, void *pItem)
     } else if (list->listType == DOUBLY_NOT_CIRCULAR) {
         if (List_Add_Doubly_NotCircular(list, FIRST, pItem) == LIST_NULL)
             return LIST_NULL;
-    
+
     } else if (list->listType == DOUBLY_CIRCULAR) {
         if (List_Add_Doubly_Circular(list, FIRST, pItem) == LIST_NULL)
             return LIST_NULL;
-    } 
+    }
 
     return LIST_OK;
 }
@@ -106,7 +106,7 @@ ListStatus_e List_Add_Last(List_t list, void *pItem)
 {
     /* Check list size */
     if (List_Size(list) >= MAX_LIST_SIZE)
-        return LIST_FULL;    
+        return LIST_FULL;
 
     /* Call function associated with list type */
     if (list->listType == SINGLY_NOT_CIRCULAR) {
@@ -120,11 +120,11 @@ ListStatus_e List_Add_Last(List_t list, void *pItem)
     } else if (list->listType == DOUBLY_NOT_CIRCULAR) {
         if (List_Add_Doubly_NotCircular(list, LAST, pItem) == LIST_NULL)
             return LIST_NULL;
-    
+
     } else if (list->listType == DOUBLY_CIRCULAR) {
         if (List_Add_Doubly_Circular(list, LAST, pItem) == LIST_NULL)
             return LIST_NULL;
-    } 
+    }
 
     return LIST_OK;
 }
@@ -135,12 +135,12 @@ ListStatus_e List_Peek_First(List_t list, void *pItem)
     if (List_Size(list) == 0)
         return LIST_EMPTY;
 
-    if (list->listType == SINGLY_NOT_CIRCULAR || 
+    if (list->listType == SINGLY_NOT_CIRCULAR ||
         list->listType == SINGLY_CIRCULAR) {
-        
+
         SNode first = (SNode)list->firstNode;
         memcpy(pItem, first->item, list->itemSize);
-    
+
     } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
                list->listType == DOUBLY_CIRCULAR) {
 
@@ -157,12 +157,12 @@ ListStatus_e List_Peek_Last(List_t list, void *pItem)
     if (List_Size(list) == 0)
         return LIST_EMPTY;
 
-    if (list->listType == SINGLY_NOT_CIRCULAR || 
+    if (list->listType == SINGLY_NOT_CIRCULAR ||
         list->listType == SINGLY_CIRCULAR) {
-        
+
         SNode last = (SNode)list->lastNode;
         memcpy(pItem, last->item, list->itemSize);
-    
+
     } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
                list->listType == DOUBLY_CIRCULAR) {
 
@@ -179,7 +179,7 @@ ListStatus_e List_Remove_First(List_t list, void *pItem)
     if (List_Size(list) == 0)
         return LIST_EMPTY;
 
-    if (list->listType == SINGLY_NOT_CIRCULAR || 
+    if (list->listType == SINGLY_NOT_CIRCULAR ||
         list->listType == SINGLY_CIRCULAR) {
 
         /*Save node item */
@@ -199,7 +199,7 @@ ListStatus_e List_Remove_First(List_t list, void *pItem)
         }
 
         free(first);
- 
+
     } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
                list->listType == DOUBLY_CIRCULAR) {
 
@@ -235,8 +235,8 @@ ListStatus_e List_Remove_Last(List_t list, void *pItem)
     if (List_Size(list) == 0)
         return LIST_EMPTY;
 
-    if (list->listType == SINGLY_NOT_CIRCULAR || 
-        list->listType == SINGLY_CIRCULAR) {     
+    if (list->listType == SINGLY_NOT_CIRCULAR ||
+        list->listType == SINGLY_CIRCULAR) {
 
         /* Save node item */
         SNode last = (SNode)list->lastNode;
@@ -252,7 +252,7 @@ ListStatus_e List_Remove_Last(List_t list, void *pItem)
         }
 
         free(last);
-    
+
     } else if (list->listType == DOUBLY_NOT_CIRCULAR ||
                list->listType == DOUBLY_CIRCULAR) {
 
@@ -276,7 +276,7 @@ ListStatus_e List_Remove_Last(List_t list, void *pItem)
         free(last);
     }
 
-    return LIST_OK;    
+    return LIST_OK;
 }
 
 
@@ -321,11 +321,11 @@ static ListStatus_e List_Add_Singly_Circular(List_t list, NodePosition_e pos, vo
         SNode last = list->lastNode;
         last->next = newNode;
         newNode->next = list->firstNode;
-        if (pos == FIRST) 
+        if (pos == FIRST)
             list->firstNode = newNode;
         else if (pos == LAST)
             list->lastNode = newNode;
-    } 
+    }
 
     return LIST_OK;
 }
@@ -383,28 +383,28 @@ static ListStatus_e List_Add_Doubly_Circular(List_t list, NodePosition_e pos, vo
             list->firstNode = newNode;
         else if (pos == LAST)
             list->lastNode = newNode;
-    } 
+    }
 
     return LIST_OK;
 }
 
-int List_Size(List_t list) 
+int List_Size(List_t list)
 {
     // To implement
     return 1;
 }
 
-static SNode Create_SNode(void *pItem, int itemSize) 
+static SNode Create_SNode(void *pItem, int itemSize)
 {
     /* Allocate memory for new node */
     SNode newNode = malloc(sizeof(struct SinglyNodeStruct));
-    if (!newNode) 
-        return NULL; 
+    if (!newNode)
+        return NULL;
 
     /* Allocate memory for node item */
     newNode->item = malloc(itemSize);
-    if (!newNode->item) 
-        return NULL; 
+    if (!newNode->item)
+        return NULL;
 
     /* Copy the item in the memory recently allocated */
     memcpy(newNode->item, pItem, itemSize);
@@ -412,17 +412,17 @@ static SNode Create_SNode(void *pItem, int itemSize)
     return newNode;
 }
 
-static DNode Create_DNode(void *pItem, int itemSize) 
+static DNode Create_DNode(void *pItem, int itemSize)
 {
     /* Allocate memory for new node */
     DNode newNode = malloc(sizeof(struct DoublyNodeStruct));
-    if (!newNode) 
-        return NULL; 
+    if (!newNode)
+        return NULL;
 
     /* Allocate memory for node item */
     newNode->item = malloc(itemSize);
-    if (!newNode->item) 
-        return NULL; 
+    if (!newNode->item)
+        return NULL;
 
     /* Copy the item in the memory recently allocated */
     memcpy(newNode->item, pItem, itemSize);
@@ -430,7 +430,7 @@ static DNode Create_DNode(void *pItem, int itemSize)
     return newNode;
 }
 
-static SNode Find_Penultimate(List_t list) 
+static SNode Find_Penultimate(List_t list)
 {
     SNode node = list->firstNode;
     SNode previousNode = node;

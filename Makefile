@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------
 #      --- Makefile used for building and testing datastructs lib ---
-# 
+#
 # Use: make [targets] (options)
 #
 # Targets:
@@ -23,7 +23,7 @@ LINK     = gcc
 ARCHIVE  = ar cr
 CPPFLAGS = -I. -I$(UNITY_PATH) -Iinclude
 CFLAGS   = -c -Wall -O2
-DBGFLAGS = -g -O0 
+DBGFLAGS = -g -O0
 LDFLAGS  =
 ifdef COV
    LDFLAGS += --coverage
@@ -108,7 +108,7 @@ $(RESULTS): $(TEST_TARGET)
 $(TEST_TARGET): $(OBJS)
 	$(LINK) $(LDFLAGS) -o $@ $^
 
-$(OBJS_PATH)%.o:: $(TESTS_PATH)%.c		          
+$(OBJS_PATH)%.o:: $(TESTS_PATH)%.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $< -o $@
 
 $(OBJS_PATH)%.o:: $(UNITY_PATH)%.c
