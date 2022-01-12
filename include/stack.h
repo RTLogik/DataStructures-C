@@ -1,6 +1,6 @@
 /**
  * @file stack.h
- * @author rtlogik - contact@rtlogik.com
+ * @author agomez - agomez@emberity.com
  * @brief Stack Interface Header
  *
  */
@@ -8,16 +8,25 @@
 #ifndef DATASTRUCTS_STACK_H
 #define DATASTRUCTS_STACK_H
 
+/******************************************************************************
+* Includes
+*******************************************************************************/
+#include <stdlib.h>
+
+/******************************************************************************
+* Preprocessor Constants
+*******************************************************************************/
 /**
  * Defines the maximum size of the stack buffer
  */
 #define MAX_STACK_SIZE 100
 
+/******************************************************************************
+* Typedefs
+*******************************************************************************/
 /**
- * @brief Stack Status Enumeration
- *
- * This enumeration is used as a return value for all of the functions
- *
+ * This typedef is used as a return value for (almost) all of the functions.
+ * It provides detailed info about the function execution
  */
 typedef enum {
     STACK_OK = 0,
@@ -31,10 +40,16 @@ typedef enum {
     STACK_NULL
 } StackStatus_e;
 
-
+/**
+ * Stack typedef for declaring an instance of a stack.
+ * Used as an input argument in all the stack interface functions
+ */
 typedef struct StackStruct *Stack_t;
 
-/************** STACK INTERFACE **************/
+
+/******************************************************************************
+* Function Prototypes (Interface)
+*******************************************************************************/
 StackStatus_e Stack_Init(Stack_t *bufferPtr, int length, int *memory);
 void Stack_Delete(Stack_t buffer);
 void Stack_Clear(Stack_t buffer);

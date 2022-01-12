@@ -1,6 +1,6 @@
 /**
  * @file queue.h
- * @author rtlogik - contact@rtlogik.com
+ * @author agomez - agomez@emberity.com
  * @brief Queue Interface Header
  *
  */
@@ -8,16 +8,22 @@
 #ifndef DATASTRUCTS_QUEUE_H
 #define DATASTRUCTS_QUEUE_H
 
+/******************************************************************************
+* Includes
+*******************************************************************************/
+#include <stdlib.h>
+
+/******************************************************************************
+* Preprocessor Constants
+*******************************************************************************/
 /**
  * Defines the maximum size of the queue buffer
  */
 #define MAX_QUEUE_SIZE 100
 
 /**
- * @brief Queue Status Enumeration
- *
- * This enumeration is used as a return value for all of the functions
- *
+ * This typedef is used as a return value for (almost) all of the functions.
+ * It provides detailed info about the function execution
  */
 typedef enum {
     QUEUE_OK = 0,
@@ -31,10 +37,15 @@ typedef enum {
     QUEUE_NULL
 } QueueStatus_e;
 
-
+/**
+ * Queue typedef for declaring an instance of a queue.
+ * Used as an input argument in all the queue interface functions
+ */
 typedef struct QueueStruct *Queue_t;
 
-/************** QUEUE INTERFACE **************/
+/******************************************************************************
+* Function Prototypes (Interface)
+*******************************************************************************/
 QueueStatus_e Queue_Init(Queue_t *bufferPtr, int length, int *memory);
 void Queue_Delete(Queue_t buffer);
 void Queue_Clear(Queue_t buffer);
