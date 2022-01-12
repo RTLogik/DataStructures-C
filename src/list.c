@@ -90,6 +90,7 @@ void List_Clear(List_t list)
         nextNode = node->next;
         free(node);
     }
+    list->listSize = 0;
 }
 
 ListStatus_e List_Add_First(List_t list, void *pItem)

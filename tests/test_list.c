@@ -84,7 +84,8 @@ void AddRemovePeekTest(List_t list)
     ItemType array5 = {13, 14, 15};
     ItemType array;
 
-
+    TEST_ASSERT_EQUAL_INT(LIST_OK, List_Add_First(list, array1));    // 1
+    List_Clear(list);
 
     TEST_ASSERT_EQUAL_INT(LIST_EMPTY, List_Peek_First(list, array));
     TEST_ASSERT_EQUAL_INT(LIST_EMPTY, List_Peek_Last(list, array));
