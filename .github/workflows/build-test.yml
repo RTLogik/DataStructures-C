@@ -23,7 +23,7 @@ jobs:
     - name: Get coverage report
       run: sudo .github/scripts/get_code_cov.sh
     - name: Upload coverage report to Codecov 
-      uses: codecov/codecov-action@v2.0.3
+      uses: codecov/codecov-action@v2.1.0
       with:
         flags: unittest
         fail_ci_if_error: true
