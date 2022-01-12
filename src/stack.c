@@ -1,6 +1,3 @@
-
-#include <stdlib.h>
-
 #include "stack.h"
 
 typedef enum {STATIC, DYNAMIC} StackMemory_e;
