@@ -2,8 +2,8 @@
 
 > A library of common data structures written in C.
 
-[![Build and Test](https://github.com/rtlogik/DataStructures-C/actions/workflows/build-test.yml/badge.svg?branch=main)](https://github.com/rtlogik/DataStructures-C/actions/workflows/build-test.yml)
-[![codecov](https://codecov.io/gh/RTLogik/DataStructures-C/branch/main/graph/badge.svg?token=B0QUKSUX5Q)](https://codecov.io/gh/RTLogik/DataStructures-C)
+[![Build and Test](https://github.com/emberity/DataStructures-C/actions/workflows/build-test.yml/badge.svg?branch=main)](https://github.com/rtlogik/DataStructures-C/actions/workflows/build-test.yml)
+[![codecov](https://codecov.io/gh/emberity/DataStructures-C/branch/main/graph/badge.svg?token=B0QUKSUX5Q)](https://codecov.io/gh/emberity/DataStructures-C)
 
 Detailed description. Bla bla blaDetailed description. Bla bla blaDetailed description. Bla bla blaDetailed description. Bla bla bla
 Detailed description. Bla bla blaDetailed description. Bla bla blaDetailed description. Bla bla blaDetailed description. Bla bla bla
