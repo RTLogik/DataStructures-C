@@ -23,14 +23,14 @@ TEST_GROUP_RUNNER(queue)
 {
     RUN_TEST_CASE(queue, InitializeQueueDynamically);
     RUN_TEST_CASE(queue, InitializeQueueDynamicallyWrong);
-    RUN_TEST_CASE(queue, InitializeQueueStatically); 
-    RUN_TEST_CASE(queue, AddRemoveQueueDynamically); 
-    RUN_TEST_CASE(queue, AddBeyondLimits); 
-    RUN_TEST_CASE(queue, RemoveBeyondLimits); 
+    RUN_TEST_CASE(queue, InitializeQueueStatically);
+    RUN_TEST_CASE(queue, AddRemoveQueueDynamically);
+    RUN_TEST_CASE(queue, AddBeyondLimits);
+    RUN_TEST_CASE(queue, RemoveBeyondLimits);
     RUN_TEST_CASE(queue, QueueClear);
-    RUN_TEST_CASE(queue, QueuePeek);
+    //RUN_TEST_CASE(queue, QueuePeek);
     RUN_TEST_CASE(queue, QueuePeekIndex);
-    RUN_TEST_CASE(queue, QueueSize); 
+    RUN_TEST_CASE(queue, QueueSize);
 }
 
 TEST_GROUP_RUNNER(linked_list)
@@ -41,6 +41,8 @@ TEST_GROUP_RUNNER(linked_list)
     RUN_TEST_CASE(linked_list, AddPeekRemoveSinglyCircular);
     RUN_TEST_CASE(linked_list, AddPeekRemoveDoublyNotCircular);
     RUN_TEST_CASE(linked_list, AddPeekRemoveDoublyCircular);
+    RUN_TEST_CASE(linked_list, ListSearch);
+
 }
 
 static void RunAllTests(void)
