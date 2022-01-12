@@ -28,8 +28,8 @@ TEST_GROUP_RUNNER(queue)
     RUN_TEST_CASE(queue, AddBeyondLimits);
     RUN_TEST_CASE(queue, RemoveBeyondLimits);
     RUN_TEST_CASE(queue, QueueClear);
-    //RUN_TEST_CASE(queue, QueuePeek);
-    RUN_TEST_CASE(queue, QueuePeekIndex);
+    RUN_TEST_CASE(queue, QueuePeek);
+    //RUN_TEST_CASE(queue, QueuePeekIndex);
     RUN_TEST_CASE(queue, QueueSize);
 }
 
