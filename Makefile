@@ -14,7 +14,7 @@
 # Options:
 #      COV - Generate code coverage info
 #
-# Author: agnavarro (rtlogik) - contact@rtlogik.com
+# Author: agnavarro - agomez@emberity.com
 #-------------------------------------------------------------------------
 
 # Compiler Defines:
