@@ -18,6 +18,7 @@ The data structures present are:
 * Queue
 * Linked List
 * Binary Tree
+* Hash table
 * ...
 
 ## Installation
@@ -45,9 +46,8 @@ Additionally, you can run `make tests` and `make docs`
 Link to _wiki_
 
 ## Author
-Antonio Gomez Navarro - contact@rtlogik.com
+Antonio Gomez Navarro - agomez@emberity.com
 
-Check my [website](www.rtlogik.com)!
+Check my [website](www.emberity.com)!
 
------------
-_Distributed under the MIT License. See `LICENSE` for more information._
+
