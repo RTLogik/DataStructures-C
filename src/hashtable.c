@@ -14,10 +14,13 @@ struct TableEntry {
 
 static unsigned int _Hash_(char *key);
 
-HashTableStatus_e HashTable_Init(HashTable_t *tablePtr)
+HashTableStatus_e HashTable_Init(HashTable_t *tablePtr, int itemSize)
 {
+    if (itemSize > MAX_ITEM_SIZE)
+        return HASHTABLE_SIZE_ERROR;
+
     // Allocate memory for the table:
-    *tablePtr = malloc(MAX_TABLE_SIZE * sizeof(struct TableEntry));
+    *tablePtr = malloc((MAX_TABLE_SIZE + 1) * sizeof(struct TableEntry));
     if (*tablePtr == NULL)
         return HASHTABLE_INIT_ERROR;
 
@@ -28,17 +31,18 @@ HashTableStatus_e HashTable_Init(HashTable_t *tablePtr)
         (*tablePtr)[i].next = NULL;
     }
 
+    // Use additional entry at the end to store item size:
+    (*tablePtr)[MAX_TABLE_SIZE].item = itemSize;
+
     return HASHTABLE_OK;
 }
 
-HashTableStatus_e HashTable_Insert(HashTable_t table, char *key, void *pItem, int itemSize)
+HashTableStatus_e HashTable_Insert(HashTable_t table, char *key, void *pItem)
 {
-    if (itemSize > MAX_ITEM_SIZE)
-        return HASHTABLE_SIZE_ERROR;
+    int itemSize = (int)table[MAX_TABLE_SIZE].item;
+    HashTable_t tmp = table;
 
     unsigned int slot = _Hash_(key);
-
-    HashTable_t tmp = table;
 
     // Search first for already existing entry
     while (table[slot].key != NULL) {
@@ -106,20 +110,23 @@ HashTableStatus_e HashTable_Insert(HashTable_t table, char *key, void *pItem, in
     return HASHTABLE_OK;
 }
 
-HashTableStatus_e HashTable_Get(HashTable_t table, char *key, void **ppItem)
+HashTableStatus_e HashTable_Get(HashTable_t table, char *key, void *pItem)
 {
     struct TableEntry entry = table[_Hash_(key)];
+    int itemSize = (int)table[MAX_TABLE_SIZE].item;
 
     if (entry.key == NULL)
         return HASHTABLE_NO_ENTRY;
 
     while (1) {
         if (strncmp(entry.key, key, MAX_KEY_LENGTH) == 0) {
-            *ppItem = entry.item;
+            memcpy(pItem, entry.item, itemSize);
             return HASHTABLE_OK;
         } else if (entry.next != NULL) {
             entry = *(entry.next);
-        } else { return HASHTABLE_NO_ENTRY; }
+        } else {
+            return HASHTABLE_NO_ENTRY;
+        }
     }
 }
 

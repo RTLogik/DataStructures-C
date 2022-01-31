@@ -57,9 +57,9 @@ typedef struct TableEntry *HashTable_t;
 /******************************************************************************
 * Function Prototypes (Interface)
 *******************************************************************************/
-HashTableStatus_e HashTable_Init(HashTable_t *tablePtr);
-HashTableStatus_e HashTable_Insert(HashTable_t table, char *key, void *pItem, int itemSize);
-HashTableStatus_e HashTable_Get(HashTable_t table, char *key, void **ppItem);
+HashTableStatus_e HashTable_Init(HashTable_t *tablePtr, int itemSize);
+HashTableStatus_e HashTable_Insert(HashTable_t table, char *key, void *pItem);
+HashTableStatus_e HashTable_Get(HashTable_t table, char *key, void *pItem);
 HashTableStatus_e HashTable_Remove(HashTable_t table, char *key);
 void HashTable_Clear(HashTable_t table);
 void HashTable_Delete(HashTable_t table);
