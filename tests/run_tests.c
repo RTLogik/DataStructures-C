@@ -42,6 +42,19 @@ TEST_GROUP_RUNNER(linked_list)
     RUN_TEST_CASE(linked_list, AddPeekRemoveDoublyNotCircular);
     RUN_TEST_CASE(linked_list, AddPeekRemoveDoublyCircular);
     RUN_TEST_CASE(linked_list, ListSearch);
+}
+
+TEST_GROUP_RUNNER(trees)
+{
+
+
+}
+
+TEST_GROUP_RUNNER(hashtable)
+{
+    RUN_TEST_CASE(hashtable, InitializeTable);
+    RUN_TEST_CASE(hashtable, InsertAndGet);
+    //RUN_TEST_CASE(hashtable, InsertAndRemove);
 
 }
 
@@ -50,6 +63,8 @@ static void RunAllTests(void)
     RUN_TEST_GROUP(stack);
     RUN_TEST_GROUP(queue);
     RUN_TEST_GROUP(linked_list);
+    //RUN_TEST_GROUP(trees);
+    RUN_TEST_GROUP(hashtable);
 }
 
 int main(int argc, char * argv[])
