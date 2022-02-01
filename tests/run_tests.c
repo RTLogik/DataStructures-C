@@ -54,7 +54,8 @@ TEST_GROUP_RUNNER(hashtable)
 {
     RUN_TEST_CASE(hashtable, InitializeTable);
     RUN_TEST_CASE(hashtable, InsertAndGet);
-    //RUN_TEST_CASE(hashtable, InsertAndRemove);
+    RUN_TEST_CASE(hashtable, InsertAndRemove);
+    RUN_TEST_CASE(hashtable, InsertAndClear);
 
 }
 
