@@ -1,4 +1,4 @@
-# DataStructures-C (WORK IN PROGRESS)
+# DataStructures-C
 
 > A library of common data structures written in C.
 
